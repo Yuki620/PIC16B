@@ -4,20 +4,27 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "PIC 16B - 2024 Winter Blog"
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
+    "objectID": "posts/bruin/index.html",
+    "href": "posts/bruin/index.html",
     "title": "HW 0",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "In this tutorial, we will be plotting a scatterplot between the Palmer Penguins’ flipper lengths and body mass to see how they compare and differ across the 3 species.\n\n\nFirst, we want to import pandas for data manipulation and seaborn for visualization.\n\nimport pandas as pd\nimport seaborn as sns\n\n\n\n\nUsing pandas, we can load in the Palmers Penguins dataset with URL below.\n\nurl = \"https://raw.githubusercontent.com/PhilChodrow/PIC16B/master/datasets/palmer_penguins.csv\"\npenguins = pd.read_csv(url)\n\n\n\n\nUsing pandas, we can subset the dataframe so that we have only the necessary components. In this case, we only need the columns: Species, Flipper Length (mm), and Body Mass (g)\n\ndf = penguins[[\"Species\", \"Flipper Length (mm)\", \"Body Mass (g)\"]]\n\n\n\n\nUsing seaborn, we can plot the scatterplot easily by using seaborn.scatterplot and setting “Flipper Length (mm)” as the x-axis and “Body Mass (g)” as the y-axis.\nIn order to group the points by species, we and differentiate the points through shape and color by setting the parameters style and hue to “Species.”\nBecause the full species names are unnecessarily long, we can change the labels of the legend by accessing it through the code scatter.legend_ and setting new labels as shown below.\n\nscatter = sns.scatterplot(x=\"Flipper Length (mm)\", y=\"Body Mass (g)\", style=\"Species\", hue=\"Species\", data=df)\n\n# Access Legend\nlegend = scatter.legend_\nnew_labels = ['Adelie', 'Chinstrap', 'Gentoo']\nlegend.set_title('Species')\nfor t, l in zip(legend.texts, new_labels): t.set_text(l)"
+  },
+  {
+    "objectID": "posts/bruin/index.html#palmer-penguins-visualization-tutorial",
+    "href": "posts/bruin/index.html#palmer-penguins-visualization-tutorial",
+    "title": "HW 0",
+    "section": "",
+    "text": "In this tutorial, we will be plotting a scatterplot between the Palmer Penguins’ flipper lengths and body mass to see how they compare and differ across the 3 species.\n\n\nFirst, we want to import pandas for data manipulation and seaborn for visualization.\n\nimport pandas as pd\nimport seaborn as sns\n\n\n\n\nUsing pandas, we can load in the Palmers Penguins dataset with URL below.\n\nurl = \"https://raw.githubusercontent.com/PhilChodrow/PIC16B/master/datasets/palmer_penguins.csv\"\npenguins = pd.read_csv(url)\n\n\n\n\nUsing pandas, we can subset the dataframe so that we have only the necessary components. In this case, we only need the columns: Species, Flipper Length (mm), and Body Mass (g)\n\ndf = penguins[[\"Species\", \"Flipper Length (mm)\", \"Body Mass (g)\"]]\n\n\n\n\nUsing seaborn, we can plot the scatterplot easily by using seaborn.scatterplot and setting “Flipper Length (mm)” as the x-axis and “Body Mass (g)” as the y-axis.\nIn order to group the points by species, we and differentiate the points through shape and color by setting the parameters style and hue to “Species.”\nBecause the full species names are unnecessarily long, we can change the labels of the legend by accessing it through the code scatter.legend_ and setting new labels as shown below.\n\nscatter = sns.scatterplot(x=\"Flipper Length (mm)\", y=\"Body Mass (g)\", style=\"Species\", hue=\"Species\", data=df)\n\n# Access Legend\nlegend = scatter.legend_\nnew_labels = ['Adelie', 'Chinstrap', 'Gentoo']\nlegend.set_title('Species')\nfor t, l in zip(legend.texts, new_labels): t.set_text(l)"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "UCLA PIC 16B Lec 1, Winter 2024",
     "section": "",
-    "text": "HW 0\n\n\n\n\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 5, 2024\n\n\nYuki Yu\n\n\n\n\n\n\nNo matching items"
+    "text": "HW 0\n\n\n\n\n\n\nWeek 0\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nYuki Yu\n\n\n\n\n\n\nNo matching items"
   }
 ]
