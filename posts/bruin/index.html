@@ -218,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="plotting-the-scatterplot" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-the-scatterplot">Plotting the Scatterplot</h3>
 <p>Using seaborn, we can plot the scatterplot easily by using <strong>seaborn.scatterplot</strong> and setting “Flipper Length (mm)” as the x-axis and “Body Mass (g)” as the y-axis.<br>
-In order to group the points by species, we and differentiate the points through shape and color by setting the parameters <strong>style</strong> and <strong>hue</strong> to “Species.”<br>
+In order to group the points by species, we can differentiate the points through shape and color by setting the parameters <strong>style</strong> and <strong>hue</strong> to “Species.”<br>
 Because the full species names are unnecessarily long, we can change the labels of the legend by accessing it through the code <strong>scatter.legend_</strong> and setting new labels as shown below.</p>
 <div id="556da33d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> sns.scatterplot(x<span class="op">=</span><span class="st">"Flipper Length (mm)"</span>, y<span class="op">=</span><span class="st">"Body Mass (g)"</span>, </span>
