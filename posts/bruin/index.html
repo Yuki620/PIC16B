@@ -221,14 +221,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 In order to group the points by species, we and differentiate the points through shape and color by setting the parameters <strong>style</strong> and <strong>hue</strong> to “Species.”<br>
 Because the full species names are unnecessarily long, we can change the labels of the legend by accessing it through the code <strong>scatter.legend_</strong> and setting new labels as shown below.</p>
 <div id="556da33d" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> sns.scatterplot(x<span class="op">=</span><span class="st">"Flipper Length (mm)"</span>, y<span class="op">=</span><span class="st">"Body Mass (g)"</span>, style<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>, data<span class="op">=</span>df)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>scatter.<span class="bu">set</span>(title<span class="op">=</span><span class="st">'Flipper Length &amp; Body Mass By Species'</span>) <span class="co"># set scatterplot title</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Access Legend</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> scatter.legend_</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>new_labels <span class="op">=</span> [<span class="st">'Adelie'</span>, <span class="st">'Chinstrap'</span>, <span class="st">'Gentoo'</span>]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>legend.set_title(<span class="st">'Species'</span>) <span class="co"># set legend title</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t, l <span class="kw">in</span> <span class="bu">zip</span>(legend.texts, new_labels): t.set_text(l) <span class="co"># add in the new labels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> sns.scatterplot(x<span class="op">=</span><span class="st">"Flipper Length (mm)"</span>, y<span class="op">=</span><span class="st">"Body Mass (g)"</span>, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                          style<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>, data<span class="op">=</span>df)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>scatter.<span class="bu">set</span>(title<span class="op">=</span><span class="st">'Flipper Length &amp; Body Mass By Species'</span>) <span class="co"># set scatterplot title</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Access Legend</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> scatter.legend_</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>new_labels <span class="op">=</span> [<span class="st">'Adelie'</span>, <span class="st">'Chinstrap'</span>, <span class="st">'Gentoo'</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>legend.set_title(<span class="st">'Species'</span>) <span class="co"># set legend title</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t, l <span class="kw">in</span> <span class="bu">zip</span>(legend.texts, new_labels): t.set_text(l) <span class="co"># add in the new labels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
