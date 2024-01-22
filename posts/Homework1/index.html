@@ -192,8 +192,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="data-wrangling-and-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="data-wrangling-and-visualization">Data Wrangling and Visualization</h2>
+<section id="visualizing-temperature" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-temperature">Visualizing Temperature</h2>
 <div id="d1f985cc" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -343,12 +343,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.set_index(keys<span class="op">=</span>[<span class="st">'ID'</span>, <span class="st">'Year'</span>])   </span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.stack()</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.reset_index()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">"level_2"</span>: <span class="st">"Month"</span>, <span class="dv">0</span>: <span class="st">"Temp"</span>}) <span class="co"># Rename the columns with clearer labels</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Month"</span>] <span class="op">=</span> df[<span class="st">"Month"</span>].<span class="bu">str</span>[<span class="dv">5</span>:].astype(<span class="bu">int</span>) <span class="co"># Extract just the numerical value as the month</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Temp"</span>] <span class="op">=</span> df[<span class="st">"Temp"</span>] <span class="op">/</span> <span class="dv">100</span> </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rename the columns with clearer labels</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">"level_2"</span>: <span class="st">"Month"</span>, <span class="dv">0</span>: <span class="st">"Temp"</span>}) </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Extract just the numerical value as the month</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Month"</span>] <span class="op">=</span> df[<span class="st">"Month"</span>].<span class="bu">str</span>[<span class="dv">5</span>:].astype(<span class="bu">int</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Temp"</span>] <span class="op">=</span> df[<span class="st">"Temp"</span>] <span class="op">/</span> <span class="dv">100</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="preparing-the-countries-table" class="level3">
@@ -414,24 +415,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="adding-the-temperatures-and-countries-tables" class="level3">
 <h3 class="anchored" data-anchor-id="adding-the-temperatures-and-countries-tables">Adding the <code>temperatures</code> and <code>countries</code> tables</h3>
 <p>The code below adds the <code>temperatures</code> and <code>countries</code> tables to the database.</p>
-<div id="e6a76547" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_iter <span class="op">=</span> pd.read_csv(<span class="st">"temps.csv"</span>, chunksize<span class="op">=</span><span class="dv">100000</span>) <span class="co"># run this again to make sure no chunks are skipped over</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, df <span class="kw">in</span> <span class="bu">enumerate</span>(df_iter):</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> prepare_df(df)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add "temperatures" table to the database</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    df.to_sql(<span class="st">"temperatures"</span>, conn, if_exists<span class="op">=</span><span class="st">"replace"</span> <span class="cf">if</span> i<span class="op">==</span><span class="dv">0</span> <span class="cf">else</span> <span class="st">"append"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#countries = merge_country(df, country)</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add "countries" table to the database</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    countries.to_sql(<span class="st">"countries"</span>, conn, if_exists<span class="op">=</span><span class="st">"replace"</span> <span class="cf">if</span> i<span class="op">==</span><span class="dv">0</span> <span class="cf">else</span> <span class="st">"append"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e6a76547" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this again to make sure no chunks are skipped over</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_iter <span class="op">=</span> pd.read_csv(<span class="st">"temps.csv"</span>, chunksize<span class="op">=</span><span class="dv">100000</span>) </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, df <span class="kw">in</span> <span class="bu">enumerate</span>(df_iter):</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> prepare_df(df)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add "temperatures" table to the database</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    df.to_sql(<span class="st">"temperatures"</span>, conn, if_exists<span class="op">=</span><span class="st">"replace"</span> <span class="cf">if</span> i<span class="op">==</span><span class="dv">0</span> <span class="cf">else</span> <span class="st">"append"</span>, </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>              index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add "countries" table to the database</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    countries.to_sql(<span class="st">"countries"</span>, conn, if_exists<span class="op">=</span><span class="st">"replace"</span> <span class="cf">if</span> i<span class="op">==</span><span class="dv">0</span> <span class="cf">else</span> <span class="st">"append"</span>, </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                     index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="adding-the-stations-table" class="level3">
 <h3 class="anchored" data-anchor-id="adding-the-stations-table">Adding the <code>stations</code> table</h3>
 <p>Now we want to add in the <code>stations</code> table. Since it is not a large csv file, we can just read it in directly.</p>
-<div id="eb4f8164" class="cell" data-scrolled="true" data-execution_count="10">
+<div id="eb4f8164" class="cell" data-scrolled="true" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>stations <span class="op">=</span> pd.read_csv(<span class="st">"station-metadata.csv"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>stations.to_sql(<span class="st">"stations"</span>, conn, if_exists<span class="op">=</span><span class="st">"replace"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>27585</code></pre>
 </div>
 </div>
@@ -439,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="verification" class="level3">
 <h3 class="anchored" data-anchor-id="verification">Verification</h3>
 <p>With the code below, we can verify that all 3 tables were successfully added into the database.</p>
-<div id="a9b4cce3" class="cell" data-execution_count="11">
+<div id="a9b4cce3" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> conn.cursor() <span class="co"># we can only execute sql commands through cursor</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cursor.execute(<span class="st">"SELECT name FROM sqlite_master WHERE type='table'"</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cursor.fetchall())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -450,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="close-the-database-connection" class="level3">
 <h3 class="anchored" data-anchor-id="close-the-database-connection">Close the database connection</h3>
-<div id="578cc345" class="cell" data-execution_count="12">
+<div id="578cc345" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>conn.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -476,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="import-query_climate_database" class="level3">
 <h3 class="anchored" data-anchor-id="import-query_climate_database">Import <code>query_climate_database()</code></h3>
-<div id="c9298f7c" class="cell" data-execution_count="13">
+<div id="c9298f7c" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> climate_database <span class="im">import</span> query_climate_database</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> inspect</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -500,6 +503,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             AND C.Name = '{country}'
         """
         df = pd.read_sql_query(cmd, conn)
+        df = df.drop_duplicates()
     return df
 </code></pre>
 </div>
@@ -508,13 +512,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="verification-1" class="level3">
 <h3 class="anchored" data-anchor-id="verification-1">Verification</h3>
 <p>As shown below, <code>query_climate_database()</code> works as intended.</p>
-<div id="e514b46c" class="cell" data-execution_count="14">
+<div id="e514b46c" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>query_climate_database(db_file <span class="op">=</span> <span class="st">"temps.db"</span>,</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                       country <span class="op">=</span> <span class="st">"India"</span>, </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                       year_begin <span class="op">=</span> <span class="dv">1980</span>, </span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                       year_end <span class="op">=</span> <span class="dv">2020</span>,</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                       month <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
 
@@ -593,7 +597,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">44123</td>
+<td data-quarto-table-cell-role="th">3147</td>
 <td>DARJEELING</td>
 <td>27.050</td>
 <td>88.270</td>
@@ -603,7 +607,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>5.10</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">44124</td>
+<td data-quarto-table-cell-role="th">3148</td>
 <td>DARJEELING</td>
 <td>27.050</td>
 <td>88.270</td>
@@ -613,7 +617,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>6.90</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">44125</td>
+<td data-quarto-table-cell-role="th">3149</td>
 <td>DARJEELING</td>
 <td>27.050</td>
 <td>88.270</td>
@@ -623,7 +627,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>8.10</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">44126</td>
+<td data-quarto-table-cell-role="th">3150</td>
 <td>DARJEELING</td>
 <td>27.050</td>
 <td>88.270</td>
@@ -633,7 +637,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>5.60</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">44127</td>
+<td data-quarto-table-cell-role="th">3151</td>
 <td>DARJEELING</td>
 <td>27.050</td>
 <td>88.270</td>
@@ -645,7 +649,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 
-<p>44128 rows × 7 columns</p>
+<p>3152 rows × 7 columns</p>
 </div>
 </div>
 </div>
@@ -655,7 +659,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="write-a-geographic-scatter-function-for-yearly-temperature-increases">3. Write a Geographic Scatter Function for Yearly Temperature Increases</h2>
 <section id="import-the-necessary-libraries-for-plotting" class="level3">
 <h3 class="anchored" data-anchor-id="import-the-necessary-libraries-for-plotting">Import the necessary libraries for plotting</h3>
-<div id="fb684866" class="cell" data-execution_count="15">
+<div id="fb684866" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotly <span class="im">import</span> express <span class="im">as</span> px</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotly.io <span class="im">import</span> write_html</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
@@ -668,7 +672,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="write-a-function-to-estimate-the-change-in-temperature" class="level3">
 <h3 class="anchored" data-anchor-id="write-a-function-to-estimate-the-change-in-temperature">Write a function to estimate the change in temperature</h3>
 <p>Let’s compute a simple estimate of the year-over-year average change in temperature in each month at each station. For this, we’ll use linear regression. We’ll use the statistical fact that, when regressing <code>Temp</code> against <code>Year</code>, the coefficient of <code>Year</code> will be an estimate of the yearly change in <code>Temp</code>.</p>
-<div id="8ba948f3" class="cell" data-execution_count="16">
+<div id="8ba948f3" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> coef(data_group):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> data_group[[<span class="st">"Year"</span>]] <span class="co"># 2 brackets because X should be a df</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> data_group[<span class="st">"Temp"</span>] <span class="co"># 1 bracket because y should be a series</span></span>
@@ -688,33 +692,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>**kwargs</code>, additional keyword arguments passed to <code>px.scatter_mapbox()</code>. These can be used to control the colormap used, the mapbox style, etc.</li>
 </ul>
 <p>The output of this function should be an interactive geographic scatterplot, constructed using Plotly Express, with a point for each station, such that the color of the point reflects an estimate of the yearly change in temperature during the specified month and time period at that station. A reasonable way to do this is to compute the first coefficient of a linear regression model at that station, as illustrated in the lecture where we used the <code>.apply()</code> method.</p>
-<div id="20c7ee61" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temperature_coefficient_plot(db_file, country, year_begin, year_end, month, min_obs, <span class="op">**</span>kwargs):</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> query_climate_database(db_file, country, year_begin, year_end, month) <span class="co"># grab the dataframe</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># count the number of yrs worth of data each station has </span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Observations"</span>] <span class="op">=</span> df.groupby([<span class="st">"NAME"</span>, <span class="st">"Month"</span>])[<span class="st">"Year"</span>].transform(<span class="st">'count'</span>) </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># find the coefficients for estimates of yearly temp change</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> df.groupby([<span class="st">"NAME"</span>,<span class="st">"Month"</span>]).<span class="bu">apply</span>(coef)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.reset_index()</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    coefs[<span class="dv">0</span>] <span class="op">=</span> coefs[<span class="dv">0</span>].<span class="bu">round</span>(<span class="dv">4</span>) <span class="co"># round the coefficients to 4 decimal places</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.rename(columns<span class="op">=</span>{<span class="dv">0</span>:<span class="st">"Yearly Temp Change (°C)"</span>})</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.drop(<span class="st">"Month"</span>, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># we don't need this col so we drop it </span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.merge(coefs, on<span class="op">=</span><span class="st">'NAME'</span>, how<span class="op">=</span> <span class="st">'left'</span>) <span class="co"># left join with df to form one singular table</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[df[<span class="st">"Observations"</span>] <span class="op">&gt;=</span> min_obs] <span class="co"># filter out the stations with &lt; min_obs yrs of data</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.scatter_mapbox(df, lat<span class="op">=</span><span class="st">"LATITUDE"</span>, lon<span class="op">=</span><span class="st">"LONGITUDE"</span>, color<span class="op">=</span><span class="st">"Yearly Temp Change (°C)"</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>                           , title <span class="op">=</span> <span class="ss">f"Estimates of yearly increase in temperature in </span><span class="sc">{</span>calendar<span class="sc">.</span>month_name[month]<span class="sc">}</span><span class="ss"> &lt;br&gt; for stations in </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">, years </span><span class="sc">{</span>year_begin<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span>year_end<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>                           , hover_name<span class="op">=</span> <span class="st">"NAME"</span> <span class="co"># show station name on each point when we hover</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>                           , color_continuous_midpoint<span class="op">=</span><span class="dv">0</span> <span class="co"># set colobar midpoint to 0</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>                           , <span class="op">**</span>kwargs)</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="20c7ee61" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temperature_coefficient_plot(db_file, country, year_begin, year_end, month, </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                                 min_obs, <span class="op">**</span>kwargs):</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># grab the dataframe</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> query_climate_database(db_file, country, year_begin, year_end, month) </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># count the number of yrs worth of data each station has </span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Obs"</span>] <span class="op">=</span> df.groupby([<span class="st">"NAME"</span>, <span class="st">"Month"</span>])[<span class="st">"Year"</span>].transform(<span class="st">'count'</span>) </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># find the coefficients for estimates of yearly temp change</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> df.groupby([<span class="st">"NAME"</span>,<span class="st">"Month"</span>]).<span class="bu">apply</span>(coef)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.reset_index()</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    coefs[<span class="dv">0</span>] <span class="op">=</span> coefs[<span class="dv">0</span>].<span class="bu">round</span>(<span class="dv">4</span>) <span class="co"># round the coefficients to 4 decimal places</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.rename(columns<span class="op">=</span>{<span class="dv">0</span>:<span class="st">"Yearly Temp Change (°C)"</span>})</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.drop(<span class="st">"Month"</span>, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># we don't need this col so we drop it </span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># left join with df to form one singular table</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.merge(coefs, on<span class="op">=</span><span class="st">'NAME'</span>, how<span class="op">=</span> <span class="st">'left'</span>) </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter out the stations with &lt; min_obs yrs of data</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[df[<span class="st">"Obs"</span>] <span class="op">&gt;=</span> min_obs] </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.scatter_mapbox(df, lat<span class="op">=</span><span class="st">"LATITUDE"</span>, lon<span class="op">=</span><span class="st">"LONGITUDE"</span> </span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>                            , color<span class="op">=</span><span class="st">"Yearly Temp Change (°C)"</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>                            ,title <span class="op">=</span> <span class="ss">f"Estimates of yearly increase in temperature in </span><span class="sc">{</span>calendar<span class="sc">.</span>month_name[month]<span class="sc">}</span><span class="ss"> &lt;br&gt;for stations in </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">, years </span><span class="sc">{</span>year_begin<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>year_end<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>                            , hover_name<span class="op">=</span> <span class="st">"NAME"</span> <span class="co"># show station each point when we hover</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>                            , color_continuous_midpoint<span class="op">=</span><span class="dv">0</span> <span class="co"># set colobar midpoint to 0</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>                            , <span class="op">**</span>kwargs)</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9a4a2c1b" class="cell" data-execution_count="18">
+<div id="9a4a2c1b" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> px.colors.diverging.RdGy_r <span class="co"># choose a colormap</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> temperature_coefficient_plot(<span class="st">"temps.db"</span>, <span class="st">"India"</span>, <span class="dv">1980</span>, <span class="dv">2020</span>, <span class="dv">1</span>, </span>
@@ -725,7 +734,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_18.html" frameborder="0" allowfullscreen=""></iframe>
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_29.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
 </div>
 </section>
@@ -734,10 +743,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="create-two-more-interesting-figures">4. Create Two More Interesting Figures</h2>
 <section id="first-visualization" class="level3">
 <h3 class="anchored" data-anchor-id="first-visualization">First Visualization</h3>
-<pre><code>Does the average temperature for a given country follow the general trend of its hemisphere?</code></pre>
-<p><code>country_to_hemisphere_plot</code> gets 4 inputs: - <code>db_file</code>: the file name for the database - <code>country</code>: a string giving the name of a country for which data should be returned. - <code>year_begin</code> and <code>year_end</code>: two integers giving the earliest and latest years for which should be returned.</p>
-<p>The output should be a barplot grouoped by year that shows the given country’s average temperature over thoughout the year. It should also be overlayed by a line plot that shows each year’s average temperature of the hemisphere the country is located in to see if the country’s average temperatures follows the pattern/trend of the average temperature of its hemisphere.</p>
-<div id="88dcb1d5" class="cell" data-scrolled="true" data-execution_count="19">
+<pre><code>Does the average temperature for a given country follow the general trend of its 
+hemisphere?</code></pre>
+<p><code>country_to_hemisphere_plot</code> gets 4 inputs:</p>
+<ul>
+<li><code>db_file</code>: the file name for the database</li>
+<li><code>country</code>: a string giving the name of a country for which data should be returned.</li>
+<li><code>year_begin</code> and <code>year_end</code>: two integers giving the earliest and latest years for which should be returned.</li>
+</ul>
+<p>The output should be a barplot grouped by year that shows the given country’s average temperature over thoughout the year. It should also be overlayed by a line plot that shows each year’s average temperature of the hemisphere the country is located in to see if the country’s average temperatures follows the pattern/trend of the average temperature of its hemisphere.</p>
+<div id="88dcb1d5" class="cell" data-scrolled="true" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> climate_database <span class="im">import</span> seasons_database</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objs <span class="im">as</span> go</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the function</span></span>
@@ -770,11 +785,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             AND C.NAME = '{country}';
         """
         df = pd.read_sql_query(cmd, conn)
+        df = df.drop_duplicates()
     return df 
 </code></pre>
 </div>
 </div>
-<div id="2c7e9d31" class="cell" data-execution_count="20">
+<div id="2c7e9d31" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> country_to_hemisphere_plot(db_file, country, year_begin, year_end):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> seasons_database(db_file, country, year_begin, year_end) <span class="co"># grab the dataframe</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add new columns 'Country Avg Temp' and 'Hemisphere Avg Temp'</span></span>
@@ -789,33 +805,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.drop_duplicates() </span>
 <span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a line plot for the hemisphere avg temperature with year as a category</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.line(df, x<span class="op">=</span><span class="st">'Month'</span>, y<span class="op">=</span><span class="st">'Hemisphere Avg Temp'</span>, color<span class="op">=</span><span class="st">'Year'</span>, title<span class="op">=</span><span class="ss">f'Average Temperature for </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">'</span>, line_group<span class="op">=</span><span class="st">'Year'</span>)</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    color_palette <span class="op">=</span> np.random.choice(px.colors.qualitative.Plotly, year_end<span class="op">-</span>year_begin<span class="op">+</span><span class="dv">1</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(year_begin, year_end<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add a bar plot for the country's average temperature</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>        year_data <span class="op">=</span> df[df[<span class="st">'Year'</span>] <span class="op">==</span> year]</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(go.Bar(x<span class="op">=</span>year_data[<span class="st">'Month'</span>], y<span class="op">=</span>year_data[<span class="st">'Country Avg Temp'</span>], name<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>country<span class="sc">}</span><span class="ss"> Avg Temp </span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">'</span>, marker<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span>color_palette[index])</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>                            , hovertemplate<span class="op">=</span><span class="st">'Avg Temp= %</span><span class="sc">{y:.4f}</span><span class="st">&lt;br&gt;Year= %</span><span class="sc">{customdata}</span><span class="st">&lt;br&gt;Month= %</span><span class="sc">{x}</span><span class="st">'</span>,</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>                            customdata<span class="op">=</span>[year] <span class="op">*</span> <span class="bu">len</span>(year_data)))</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>        index <span class="op">+=</span><span class="dv">1</span></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(barmode<span class="op">=</span><span class="st">'group'</span>, xaxis_title<span class="op">=</span><span class="st">'Month'</span>, yaxis_title<span class="op">=</span><span class="st">'Temperature (°C)'</span>, legend_title<span class="op">=</span><span class="st">'Legend'</span>)</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.line(df, x<span class="op">=</span><span class="st">'Month'</span>, y<span class="op">=</span><span class="st">'Hemisphere Avg Temp'</span>, color<span class="op">=</span><span class="st">'Year'</span>, </span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>                  title<span class="op">=</span><span class="ss">f'Average Temperature for </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">'</span>, line_group<span class="op">=</span><span class="st">'Year'</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    color_palette <span class="op">=</span> np.random.choice(px.colors.qualitative.Plotly, </span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>                                     year_end<span class="op">-</span>year_begin<span class="op">+</span><span class="dv">1</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(year_begin, year_end<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add a bar plot for the country's average temperature</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>        year_data <span class="op">=</span> df[df[<span class="st">'Year'</span>] <span class="op">==</span> year]</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(go.Bar(x<span class="op">=</span>year_data[<span class="st">'Month'</span>], y<span class="op">=</span>year_data[<span class="st">'Country Avg Temp'</span>], </span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>                             name<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>country<span class="sc">}</span><span class="ss"> Avg Temp </span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">'</span>, </span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>                             marker<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span>color_palette[index])</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>                            , hovertemplate<span class="op">=</span><span class="st">'Avg Temp= %</span><span class="sc">{y:.4f}</span><span class="st">&lt;br&gt;Year= %</span><span class="sc">{customdata}</span><span class="st">&lt;br&gt;Month= %</span><span class="sc">{x}</span><span class="st">'</span>,</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>                            customdata<span class="op">=</span>[year] <span class="op">*</span> <span class="bu">len</span>(year_data)))</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>        index <span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(barmode<span class="op">=</span><span class="st">'group'</span>, xaxis_title<span class="op">=</span><span class="st">'Month'</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>                      , yaxis_title<span class="op">=</span><span class="st">'Temperature (°C)'</span>, legend_title<span class="op">=</span><span class="st">'Legend'</span>)</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3e607bd3" class="cell" data-scrolled="true" data-execution_count="21">
+<div id="3e607bd3" class="cell" data-scrolled="true" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> country_to_hemisphere_plot(<span class="st">"temps.db"</span>, <span class="st">'India'</span>, <span class="dv">2016</span>, <span class="dv">2018</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_21.html" frameborder="0" allowfullscreen=""></iframe>
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_20.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
 </div>
 </section>
 <section id="second-visualization" class="level3">
 <h3 class="anchored" data-anchor-id="second-visualization">Second Visualization</h3>
-<pre><code>Has there been significant seasonal temperature change over the years for a given country?</code></pre>
+<pre><code>Has there been significant seasonal temperature change over the years for a given 
+country?</code></pre>
 <p><code>season_plot</code> gets 4 inputs:</p>
 <ul>
 <li><code>db_file</code>: the file name for the database</li>
@@ -823,7 +845,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>year_begin</code> and <code>year_end</code>: two integers giving the earliest and latest years for which should be returned.</li>
 </ul>
 <p>The output should be a line plot that shows how the temperature of the country changes throughout the years for all 4 seasons (one line for each season). You should also be able to see the season, slope, and p-value of each line as you hover above it.</p>
-<div id="dea2539a" class="cell" data-execution_count="22">
+<div id="dea2539a" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> season_plot(db_file, country, year_begin, year_end):</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> seasons_database(db_file, country, year_begin, year_end)</span>
@@ -864,11 +886,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="00b7a507" class="cell" data-execution_count="23">
+<div id="00b7a507" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> season_plot(<span class="st">'temps.db'</span>, <span class="st">'China'</span>, <span class="dv">1980</span>, <span class="dv">2021</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_23.html" frameborder="0" allowfullscreen=""></iframe>
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_22.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
 </div>
 <p>From this plot, we see that China has been getting warmer over the years for fall, spring, and summer. All 3 seasons have a positive slope with an extremely small p-value, indicating that this increase in temperature is significant. Though China’s winters have a negative slope, it’s p-value is relatively large at approximately 0.5, making this result insignificant.</p>
