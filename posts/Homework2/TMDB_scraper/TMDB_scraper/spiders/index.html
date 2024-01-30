@@ -192,11 +192,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="web-scraping-tmdb" class="level2">
-<h2 class="anchored" data-anchor-id="web-scraping-tmdb">Web Scraping TMDB</h2>
-</section>
-<section id="wonka" class="level2">
-<h2 class="anchored" data-anchor-id="wonka">“Wonka”</h2>
+<section id="web-scraping-tmdb---wonka" class="level2">
+<h2 class="anchored" data-anchor-id="web-scraping-tmdb---wonka">Web Scraping TMDB - “Wonka”</h2>
 <div id="07801fb1" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -286,41 +283,44 @@ cd TMDB_scraper</code></pre>
 <p><code>parse(self, response)</code> should assume that you start on a movie page, and then navigate to the Full Cast &amp; Crew page. Remember that this page has url <movie_url>cast. (You are allowed to hardcode that part.) Once there, the parse_full_credits(self,response) should be called, by specifying this method in the callback argument to a yielded scrapy.Request. The parse() method does not return any data. This method should be no more than 5 lines of code, excluding comments and docstrings.</movie_url></p>
 <div id="5bd6d1a5" class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse(<span class="va">self</span>, response):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>        cast_page <span class="op">=</span> response.url <span class="op">+</span> <span class="st">'/cast'</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">yield</span> scrapy.Request(cast_page, callback<span class="op">=</span><span class="va">self</span>.parse_full_credits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Navigates from a movie page to its 'Full Cast &amp; Crew' page."""</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    cast_page <span class="op">=</span> response.url <span class="op">+</span> <span class="st">'/cast'</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> scrapy.Request(cast_page, callback<span class="op">=</span><span class="va">self</span>.parse_full_credits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>parse_full_credits(self, response)</code> should assume that you start on the Full Cast &amp; Crew page. Its purpose is to yield a scrapy.Request for the page of each actor listed on the page. Crew members are not included. The yielded request should specify the method parse_actor_page(self, response) should be called when the actor’s page is reached. The parse_full_credits() method does not return any data. This method should be no more than 5 lines of code, excluding comments and docstrings.</p>
 <div id="6208ca2e" class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_full_credits(<span class="va">self</span>, response):</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># extract the links for each actor</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        actor_links <span class="op">=</span> response.css(<span class="st">'ol.people.credits:not(.crew) li a::attr(href)'</span>).extract() </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> link <span class="kw">in</span> actor_links:</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>            <span class="co"># use response.urljoin to get the absolute link!</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            full_url <span class="op">=</span> response.urljoin(link)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> scrapy.Request(full_url, callback <span class="op">=</span> <span class="va">self</span>.parse_actor_page)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Yields requests for each actor's page from the 'Full Cast &amp; Crew' page."""</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extract the links for each actor</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    actor_links <span class="op">=</span> response.css(<span class="st">'ol.people.credits:not(.crew) li a::attr(href)'</span>).extract() </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> link <span class="kw">in</span> actor_links:</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># use response.urljoin to get the absolute link!</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        full_url <span class="op">=</span> response.urljoin(link)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">yield</span> scrapy.Request(full_url, callback <span class="op">=</span> <span class="va">self</span>.parse_actor_page)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>parse_actor_page(self, response)</code> should assume that you start on the page of an actor. It should yield a dictionary with two key-value pairs, of the form <code>{"actor" : actor_name, "movie_or_TV_name" : movie_or_TV_name}</code>. The method should yield one such dictionary for each of the movies or TV shows on which that actor has worked in an acting role. Note that you will need to determine both the name of the actor and the name of each movie or TV show. This method should be no more than 15 lines of code, excluding comments and docstrings.</p>
 <div id="5075d1f4" class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_actor_page(<span class="va">self</span>, response):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># extract actor name</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        actor_name <span class="op">=</span> response.css(<span class="st">'h2.title a::text'</span>).get().strip()</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Make sure we only select the 'Acting'</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        h3_elements <span class="op">=</span> response.css(<span class="st">'div.credits_list h3'</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> h3 <span class="kw">in</span> h3_elements:</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'Acting'</span> <span class="kw">in</span> h3.xpath(<span class="st">'./text()'</span>).get():</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                acting_table <span class="op">=</span> h3.xpath(<span class="st">'following-sibling::table[1]'</span>).get()</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        table_selector <span class="op">=</span> Selector(text<span class="op">=</span>acting_table)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> credit <span class="kw">in</span> table_selector.css(<span class="st">'table.credit_group tr'</span>):</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>            <span class="co"># extract movie or tv show name</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>            movie_or_TV_name <span class="op">=</span> credit.css(<span class="st">'td.role a.tooltip bdi::text'</span>).get().strip()</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> {</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">'actor'</span>: actor_name,</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">'movie_or_TV_name'</span>: movie_or_TV_name</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>            }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Yields the actor's name and the names of movies or TV shows they've acted in."""</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extract actor name</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    actor_name <span class="op">=</span> response.css(<span class="st">'h2.title a::text'</span>).get().strip()</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make sure we only select the 'Acting'</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    h3_elements <span class="op">=</span> response.css(<span class="st">'div.credits_list h3'</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> h3 <span class="kw">in</span> h3_elements:</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'Acting'</span> <span class="kw">in</span> h3.xpath(<span class="st">'./text()'</span>).get():</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>            acting_table <span class="op">=</span> h3.xpath(<span class="st">'following-sibling::table[1]'</span>).get()</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    table_selector <span class="op">=</span> Selector(text<span class="op">=</span>acting_table)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> credit <span class="kw">in</span> table_selector.css(<span class="st">'table.credit_group tr'</span>):</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># extract movie or tv show name</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        movie_or_TV_name <span class="op">=</span> credit.css(<span class="st">'td.role a.tooltip bdi::text'</span>).get().strip()</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">yield</span> {</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">'actor'</span>: actor_name,</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">'movie_or_TV_name'</span>: movie_or_TV_name</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>            }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Provided that these methods are correctly implemented, you can run the command</p>
 <div id="e8700888" class="cell">
