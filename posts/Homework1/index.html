@@ -192,8 +192,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="visualizing-temperature" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-temperature">Visualizing Temperature</h2>
+<section id="global-climate-over-time-temperature-trends-by-country" class="level2">
+<h2 class="anchored" data-anchor-id="global-climate-over-time-temperature-trends-by-country">Global Climate Over Time: Temperature Trends by Country</h2>
 <div id="d1f985cc" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -339,17 +339,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The first table we want to put into the database is <code>temperatures</code>, so we will need to restructure the dataframe so that we get a cleaner look. Therefore, we will write a function as shown below to prepare our table.</p>
 <div id="522358c3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prepare_df(df):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Stack the table with ID and Year as the index</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.set_index(keys<span class="op">=</span>[<span class="st">'ID'</span>, <span class="st">'Year'</span>])   </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.stack()</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.reset_index()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rename the columns with clearer labels</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">"level_2"</span>: <span class="st">"Month"</span>, <span class="dv">0</span>: <span class="st">"Temp"</span>}) </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Extract just the numerical value as the month</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Month"</span>] <span class="op">=</span> df[<span class="st">"Month"</span>].<span class="bu">str</span>[<span class="dv">5</span>:].astype(<span class="bu">int</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Temp"</span>] <span class="op">=</span> df[<span class="st">"Temp"</span>] <span class="op">/</span> <span class="dv">100</span> </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Transforms a DataFrame of temperature data into a long-form DataFrame with standardized column names.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    - df (DataFrame): A pandas DataFrame with 'ID', 'Year', and monthly temperature columns.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">    - DataFrame: The transformed DataFrame with columns 'ID', 'Year', 'Month', and 'Temp',</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">      where 'Month' is a numerical month and 'Temp' is the rescaled temperature value.</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Stack the table with ID and Year as the index</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.set_index(keys<span class="op">=</span>[<span class="st">'ID'</span>, <span class="st">'Year'</span>])   </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.stack()</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.reset_index()</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rename the columns with clearer labels</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">"level_2"</span>: <span class="st">"Month"</span>, <span class="dv">0</span>: <span class="st">"Temp"</span>}) </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Extract just the numerical value as the month</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Month"</span>] <span class="op">=</span> df[<span class="st">"Month"</span>].<span class="bu">str</span>[<span class="dv">5</span>:].astype(<span class="bu">int</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Temp"</span>] <span class="op">=</span> df[<span class="st">"Temp"</span>] <span class="op">/</span> <span class="dv">100</span> </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="preparing-the-countries-table" class="level3">
@@ -487,6 +497,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(query_climate_database))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>def query_climate_database(db_file, country, year_begin, year_end, month):
+    """
+    Retrieves temperature readings from the climate database for a specified country and date range.
+
+    Parameters:
+    - db_file (str): Path to the SQLite database file.
+    - country (str): Country name to filter the temperature readings.
+    - year_begin (int): Starting year for the range of readings.
+    - year_end (int): Ending year for the range of readings.
+    - month (int): Month of the year for which the readings are queried.
+
+    Returns:
+    - DataFrame: A pandas DataFrame containing temperature readings, with columns for station 
+      name, latitude, longitude, country, year, month, and average temperature.
+    """
     with sqlite3.connect(db_file) as conn:
         # conn is automatically closed when this block ends
 
@@ -674,11 +698,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s compute a simple estimate of the year-over-year average change in temperature in each month at each station. For this, we’ll use linear regression. We’ll use the statistical fact that, when regressing <code>Temp</code> against <code>Year</code>, the coefficient of <code>Year</code> will be an estimate of the yearly change in <code>Temp</code>.</p>
 <div id="8ba948f3" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> coef(data_group):</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> data_group[[<span class="st">"Year"</span>]] <span class="co"># 2 brackets because X should be a df</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> data_group[<span class="st">"Temp"</span>] <span class="co"># 1 bracket because y should be a series</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    LR <span class="op">=</span> LinearRegression()</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    LR.fit(x, y)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> LR.coef_[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculates the coefficient from a linear regression of yearly temperature data.</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">    This function performs a linear regression on the 'Year' column of the provided DataFrame</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">    against the 'Temp' column to estimate the year-over-year change in temperature.</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">    - data_group (DataFrame): A pandas DataFrame with 'Year' and 'Temp' columns.</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">    - float: The coefficient representing the annual change in temperature.</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> data_group[[<span class="st">"Year"</span>]] <span class="co"># 2 brackets because X should be a df</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> data_group[<span class="st">"Temp"</span>] <span class="co"># 1 bracket because y should be a series</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    LR <span class="op">=</span> LinearRegression()</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    LR.fit(x, y)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> LR.coef_[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="write-the-function-temperature_coefficient_plot" class="level3">
@@ -692,38 +728,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>**kwargs</code>, additional keyword arguments passed to <code>px.scatter_mapbox()</code>. These can be used to control the colormap used, the mapbox style, etc.</li>
 </ul>
 <p>The output of this function should be an interactive geographic scatterplot, constructed using Plotly Express, with a point for each station, such that the color of the point reflects an estimate of the yearly change in temperature during the specified month and time period at that station. A reasonable way to do this is to compute the first coefficient of a linear regression model at that station, as illustrated in the lecture where we used the <code>.apply()</code> method.</p>
-<div id="20c7ee61" class="cell" data-execution_count="27">
+<div id="20c7ee61" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temperature_coefficient_plot(db_file, country, year_begin, year_end, month, </span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                                 min_obs, <span class="op">**</span>kwargs):</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># grab the dataframe</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> query_climate_database(db_file, country, year_begin, year_end, month) </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># count the number of yrs worth of data each station has </span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Obs"</span>] <span class="op">=</span> df.groupby([<span class="st">"NAME"</span>, <span class="st">"Month"</span>])[<span class="st">"Year"</span>].transform(<span class="st">'count'</span>) </span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># find the coefficients for estimates of yearly temp change</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> df.groupby([<span class="st">"NAME"</span>,<span class="st">"Month"</span>]).<span class="bu">apply</span>(coef)</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.reset_index()</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    coefs[<span class="dv">0</span>] <span class="op">=</span> coefs[<span class="dv">0</span>].<span class="bu">round</span>(<span class="dv">4</span>) <span class="co"># round the coefficients to 4 decimal places</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.rename(columns<span class="op">=</span>{<span class="dv">0</span>:<span class="st">"Yearly Temp Change (°C)"</span>})</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.drop(<span class="st">"Month"</span>, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># we don't need this col so we drop it </span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># left join with df to form one singular table</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.merge(coefs, on<span class="op">=</span><span class="st">'NAME'</span>, how<span class="op">=</span> <span class="st">'left'</span>) </span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter out the stations with &lt; min_obs yrs of data</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[df[<span class="st">"Obs"</span>] <span class="op">&gt;=</span> min_obs] </span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.scatter_mapbox(df, lat<span class="op">=</span><span class="st">"LATITUDE"</span>, lon<span class="op">=</span><span class="st">"LONGITUDE"</span> </span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>                            , color<span class="op">=</span><span class="st">"Yearly Temp Change (°C)"</span></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>                            ,title <span class="op">=</span> <span class="ss">f"Estimates of yearly increase in temperature in </span><span class="sc">{</span>calendar<span class="sc">.</span>month_name[month]<span class="sc">}</span><span class="ss"> &lt;br&gt;for stations in </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">, years </span><span class="sc">{</span>year_begin<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>year_end<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>                            , hover_name<span class="op">=</span> <span class="st">"NAME"</span> <span class="co"># show station each point when we hover</span></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>                            , color_continuous_midpoint<span class="op">=</span><span class="dv">0</span> <span class="co"># set colobar midpoint to 0</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>                            , <span class="op">**</span>kwargs)</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Generates an interactive scatterplot map showing the yearly change in temperature </span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">    for each station within a given country, filtered by the number of observations.</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">    - db_file (str): Path to the database file.</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">    - country (str): Name of the country for which the data is queried.</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_begin (int): The starting year for the query.</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_end (int): The ending year for the query.</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">    - month (int): The month for which the data is queried.</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">    - min_obs (int): Minimum number of years of data required for a station to be included.</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">    - **kwargs: Additional keyword arguments passed to px.scatter_mapbox().</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">    - plotly.graph_objs._figure.Figure: An interactive map visualization created with Plotly Express.</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># grab the dataframe</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> query_climate_database(db_file, country, year_begin, year_end, month) </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># count the number of yrs worth of data each station has </span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"Obs"</span>] <span class="op">=</span> df.groupby([<span class="st">"NAME"</span>, <span class="st">"Month"</span>])[<span class="st">"Year"</span>].transform(<span class="st">'count'</span>) </span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># find the coefficients for estimates of yearly temp change</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> df.groupby([<span class="st">"NAME"</span>,<span class="st">"Month"</span>]).<span class="bu">apply</span>(coef)</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.reset_index()</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    coefs[<span class="dv">0</span>] <span class="op">=</span> coefs[<span class="dv">0</span>].<span class="bu">round</span>(<span class="dv">4</span>) <span class="co"># round the coefficients to 4 decimal places</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.rename(columns<span class="op">=</span>{<span class="dv">0</span>:<span class="st">"Yearly Temp Change (°C)"</span>})</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    coefs <span class="op">=</span> coefs.drop(<span class="st">"Month"</span>, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># we don't need this col so we drop it </span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># left join with df to form one singular table</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.merge(coefs, on<span class="op">=</span><span class="st">'NAME'</span>, how<span class="op">=</span> <span class="st">'left'</span>) </span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter out the stations with &lt; min_obs yrs of data</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[df[<span class="st">"Obs"</span>] <span class="op">&gt;=</span> min_obs] </span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.scatter_mapbox(df, lat<span class="op">=</span><span class="st">"LATITUDE"</span>, lon<span class="op">=</span><span class="st">"LONGITUDE"</span> </span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>                            , color<span class="op">=</span><span class="st">"Yearly Temp Change (°C)"</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>                            ,title <span class="op">=</span> <span class="ss">f"Estimates of yearly increase in temperature in </span><span class="sc">{</span>calendar<span class="sc">.</span>month_name[month]<span class="sc">}</span><span class="ss"> &lt;br&gt;for stations in </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">, years </span><span class="sc">{</span>year_begin<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>year_end<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>                            , hover_name<span class="op">=</span> <span class="st">"NAME"</span> <span class="co"># show station each point when we hover</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>                            , color_continuous_midpoint<span class="op">=</span><span class="dv">0</span> <span class="co"># set colobar midpoint to 0</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>                            , <span class="op">**</span>kwargs)</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9a4a2c1b" class="cell" data-execution_count="29">
+<div id="9a4a2c1b" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> px.colors.diverging.RdGy_r <span class="co"># choose a colormap</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> temperature_coefficient_plot(<span class="st">"temps.db"</span>, <span class="st">"India"</span>, <span class="dv">1980</span>, <span class="dv">2020</span>, <span class="dv">1</span>, </span>
@@ -734,7 +786,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_29.html" frameborder="0" allowfullscreen=""></iframe>
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_17.html" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
+<div id="31381edd" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> px.colors.diverging.Tealrose <span class="co"># choose a colormap</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> temperature_coefficient_plot(<span class="st">"temps.db"</span>, <span class="st">"Germany"</span>, <span class="dv">1992</span>, <span class="dv">2016</span>, <span class="dv">1</span>, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                                   min_obs <span class="op">=</span> <span class="dv">10</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                                   zoom <span class="op">=</span> <span class="dv">3</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                                   mapbox_style<span class="op">=</span><span class="st">"carto-positron"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                                   color_continuous_scale<span class="op">=</span>color_map)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_26.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
 </div>
 </section>
@@ -753,12 +819,26 @@ hemisphere?</code></pre>
 </ul>
 <p>The output should be a barplot grouped by year that shows the given country’s average temperature over thoughout the year. It should also be overlayed by a line plot that shows each year’s average temperature of the hemisphere the country is located in to see if the country’s average temperatures follows the pattern/trend of the average temperature of its hemisphere.</p>
 <div id="88dcb1d5" class="cell" data-scrolled="true" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> climate_database <span class="im">import</span> seasons_database</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objs <span class="im">as</span> go</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the function</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(seasons_database))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> climate_database <span class="im">import</span> seasons_database</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objs <span class="im">as</span> go</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the function</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(seasons_database))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>def seasons_database(db_file, country, year_begin, year_end):
+    """
+    Retrieves temperature readings classified by hemisphere and seasons for a specified country and date range.
+
+    Parameters:
+    - db_file (str): Path to the SQLite database file.
+    - country (str): Country name to filter the temperature readings.
+    - year_begin (int): Starting year for the range of readings.
+    - year_end (int): Ending year for the range of readings.
+
+    Returns:
+    - DataFrame: A pandas DataFrame containing the temperature readings along with additional columns 
+      'Hemispheres' and 'Seasons' indicating the hemisphere (North or South) and the meteorological 
+      season when the reading was taken.
+    """
 
     with sqlite3.connect(db_file) as conn:
         cmd = \
@@ -791,44 +871,59 @@ hemisphere?</code></pre>
 </div>
 </div>
 <div id="2c7e9d31" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> country_to_hemisphere_plot(db_file, country, year_begin, year_end):</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> seasons_database(db_file, country, year_begin, year_end) <span class="co"># grab the dataframe</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add new columns 'Country Avg Temp' and 'Hemisphere Avg Temp'</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Country Avg Temp'</span>] <span class="op">=</span> df.groupby([<span class="st">"Country"</span>, <span class="st">"Year"</span>, <span class="st">"Month"</span>])[<span class="st">"Temp"</span>].transform(np.mean)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Hemisphere Avg Temp'</span>] <span class="op">=</span> df.groupby([<span class="st">'Hemispheres'</span>, <span class="st">'Year'</span>, <span class="st">'Month'</span>])[<span class="st">'Temp'</span>].transform(np.mean)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Country Avg Temp'</span>] <span class="op">=</span> df[<span class="st">'Country Avg Temp'</span>].<span class="bu">round</span>(<span class="dv">4</span>)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Hemisphere Avg Temp'</span>] <span class="op">=</span> df[<span class="st">'Hemisphere Avg Temp'</span>].<span class="bu">round</span>(<span class="dv">4</span>)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make sure that we don't have duplicate data for the given country</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[df[<span class="st">'Country'</span>] <span class="op">==</span> country]</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.drop([<span class="st">'NAME'</span>, <span class="st">'Temp'</span>, <span class="st">'LATITUDE'</span>, <span class="st">'LONGITUDE'</span>, <span class="st">'Seasons'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.sort_values(by<span class="op">=</span>[<span class="st">'Year'</span>, <span class="st">'Month'</span>])</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.drop_duplicates() </span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a line plot for the hemisphere avg temperature with year as a category</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.line(df, x<span class="op">=</span><span class="st">'Month'</span>, y<span class="op">=</span><span class="st">'Hemisphere Avg Temp'</span>, color<span class="op">=</span><span class="st">'Year'</span>, </span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>                  title<span class="op">=</span><span class="ss">f'Average Temperature for </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">'</span>, line_group<span class="op">=</span><span class="st">'Year'</span>)</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    color_palette <span class="op">=</span> np.random.choice(px.colors.qualitative.Plotly, </span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>                                     year_end<span class="op">-</span>year_begin<span class="op">+</span><span class="dv">1</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(year_begin, year_end<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add a bar plot for the country's average temperature</span></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>        year_data <span class="op">=</span> df[df[<span class="st">'Year'</span>] <span class="op">==</span> year]</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(go.Bar(x<span class="op">=</span>year_data[<span class="st">'Month'</span>], y<span class="op">=</span>year_data[<span class="st">'Country Avg Temp'</span>], </span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>                             name<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>country<span class="sc">}</span><span class="ss"> Avg Temp </span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">'</span>, </span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>                             marker<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span>color_palette[index])</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>                            , hovertemplate<span class="op">=</span><span class="st">'Avg Temp= %</span><span class="sc">{y:.4f}</span><span class="st">&lt;br&gt;Year= %</span><span class="sc">{customdata}</span><span class="st">&lt;br&gt;Month= %</span><span class="sc">{x}</span><span class="st">'</span>,</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>                            customdata<span class="op">=</span>[year] <span class="op">*</span> <span class="bu">len</span>(year_data)))</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>        index <span class="op">+=</span><span class="dv">1</span></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(barmode<span class="op">=</span><span class="st">'group'</span>, xaxis_title<span class="op">=</span><span class="st">'Month'</span></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>                      , yaxis_title<span class="op">=</span><span class="st">'Temperature (°C)'</span>, legend_title<span class="op">=</span><span class="st">'Legend'</span>)</span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> country_to_hemisphere_plot(db_file, country, year_begin, year_end):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Creates a visualization comparing the average temperature of a specified country </span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">    to the average temperature of its hemisphere, grouped by month and year.</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">    - db_file (str): Path to the SQLite database file containing temperature data.</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">    - country (str): The name of the country for analysis.</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_begin (int): The start year for the data analysis.</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_end (int): The end year for the data analysis.</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">    - plotly.graph_objs._figure.Figure: A Plotly figure object that contains a line plot </span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">      for the hemisphere's average temperature and bar plots for the country's average </span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">      temperature for each month within the specified year range.</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> seasons_database(db_file, country, year_begin, year_end) <span class="co"># grab the dataframe</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add new columns 'Country Avg Temp' and 'Hemisphere Avg Temp'</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Country Avg Temp'</span>] <span class="op">=</span> df.groupby([<span class="st">"Country"</span>, <span class="st">"Year"</span>, <span class="st">"Month"</span>])[<span class="st">"Temp"</span>].transform(np.mean)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Hemisphere Avg Temp'</span>] <span class="op">=</span> df.groupby([<span class="st">'Hemispheres'</span>, <span class="st">'Year'</span>, <span class="st">'Month'</span>])[<span class="st">'Temp'</span>].transform(np.mean)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Country Avg Temp'</span>] <span class="op">=</span> df[<span class="st">'Country Avg Temp'</span>].<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'Hemisphere Avg Temp'</span>] <span class="op">=</span> df[<span class="st">'Hemisphere Avg Temp'</span>].<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make sure that we don't have duplicate data for the given country</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df[df[<span class="st">'Country'</span>] <span class="op">==</span> country]</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.drop([<span class="st">'NAME'</span>, <span class="st">'Temp'</span>, <span class="st">'LATITUDE'</span>, <span class="st">'LONGITUDE'</span>, <span class="st">'Seasons'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.sort_values(by<span class="op">=</span>[<span class="st">'Year'</span>, <span class="st">'Month'</span>])</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.drop_duplicates() </span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a line plot for the hemisphere avg temperature with year as a category</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.line(df, x<span class="op">=</span><span class="st">'Month'</span>, y<span class="op">=</span><span class="st">'Hemisphere Avg Temp'</span>, color<span class="op">=</span><span class="st">'Year'</span>, </span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>                  title<span class="op">=</span><span class="ss">f'Average Temperature for </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">'</span>, line_group<span class="op">=</span><span class="st">'Year'</span>)</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>    color_palette <span class="op">=</span> np.random.choice(px.colors.qualitative.Plotly, </span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>                                     year_end<span class="op">-</span>year_begin<span class="op">+</span><span class="dv">1</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(year_begin, year_end<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add a bar plot for the country's average temperature</span></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>        year_data <span class="op">=</span> df[df[<span class="st">'Year'</span>] <span class="op">==</span> year]</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(go.Bar(x<span class="op">=</span>year_data[<span class="st">'Month'</span>], y<span class="op">=</span>year_data[<span class="st">'Country Avg Temp'</span>], </span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>                             name<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>country<span class="sc">}</span><span class="ss"> Avg Temp </span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">'</span>, </span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>                             marker<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span>color_palette[index])</span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>                            , hovertemplate<span class="op">=</span><span class="st">'Avg Temp= %</span><span class="sc">{y:.4f}</span><span class="st">&lt;br&gt;Year= %</span><span class="sc">{customdata}</span><span class="st">&lt;br&gt;Month= %</span><span class="sc">{x}</span><span class="st">'</span>,</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>                            customdata<span class="op">=</span>[year] <span class="op">*</span> <span class="bu">len</span>(year_data)))</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>        index <span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(barmode<span class="op">=</span><span class="st">'group'</span>, xaxis_title<span class="op">=</span><span class="st">'Month'</span></span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>                      , yaxis_title<span class="op">=</span><span class="st">'Temperature (°C)'</span>, legend_title<span class="op">=</span><span class="st">'Legend'</span>)</span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="3e607bd3" class="cell" data-scrolled="true" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> country_to_hemisphere_plot(<span class="st">"temps.db"</span>, <span class="st">'India'</span>, <span class="dv">2016</span>, <span class="dv">2018</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> country_to_hemisphere_plot(<span class="st">"temps.db"</span>, <span class="st">'India'</span>, <span class="dv">2016</span>, <span class="dv">2018</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_20.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
@@ -846,49 +941,67 @@ country?</code></pre>
 </ul>
 <p>The output should be a line plot that shows how the temperature of the country changes throughout the years for all 4 seasons (one line for each season). You should also be able to see the season, slope, and p-value of each line as you hover above it.</p>
 <div id="dea2539a" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> season_plot(db_file, country, year_begin, year_end):</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> seasons_database(db_file, country, year_begin, year_end)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.groupby([<span class="st">'Year'</span>,<span class="st">'Seasons'</span>])[<span class="st">'Temp'</span>].<span class="bu">apply</span>(np.mean)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.reset_index()</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> go.Figure()</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each season, fit a lin reg model</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> season <span class="kw">in</span> df[<span class="st">'Seasons'</span>].unique():</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>        season_data <span class="op">=</span> df[df[<span class="st">'Seasons'</span>] <span class="op">==</span> season]</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fit the regression model</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> sm.add_constant(season_data[<span class="st">'Year'</span>])</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> sm.OLS(season_data[<span class="st">'Temp'</span>], X).fit()</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the slope and the p-value</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>        slope <span class="op">=</span> model.params[<span class="st">'Year'</span>]</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>        p_value <span class="op">=</span> model.pvalues[<span class="st">'Year'</span>]</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># plot</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>        hover_text <span class="op">=</span> <span class="ss">f"Season: </span><span class="sc">{</span>season<span class="sc">}</span><span class="ss">&lt;br&gt;Slope: </span><span class="sc">{</span>slope<span class="sc">:.4f}</span><span class="ss">&lt;br&gt;p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4g}</span><span class="ss">"</span></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(go.Scatter(</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>season_data[<span class="st">'Year'</span>],</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>season_data[<span class="st">'Temp'</span>],</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>            mode<span class="op">=</span><span class="st">'lines+markers'</span>,</span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span>season,</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>            text<span class="op">=</span>hover_text, </span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>            hoverinfo<span class="op">=</span><span class="st">'text+x+y'</span>  <span class="co"># hover text with the x and y values</span></span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>        ))</span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(</span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="ss">f'Seasonal Temperatures of </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">, years </span><span class="sc">{</span>year_begin<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span>year_end<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>        xaxis_title<span class="op">=</span><span class="st">'Year'</span>,</span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>        yaxis_title<span class="op">=</span><span class="st">'Temperature (°C)'</span>,</span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>        legend_title<span class="op">=</span><span class="st">'Seasons'</span></span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> season_plot(db_file, country, year_begin, year_end):</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Generates a line plot showing seasonal temperature changes over years for a given country.</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Analyzes average temperature data by season and visualizes trends using linear regression</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">    models. Each season's line plot includes annotations for the slope and p-value, indicating</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">    the rate of temperature change and statistical significance.</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">    - db_file (str): Path to the SQLite database file.</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">    - country (str): The country for which temperature data is analyzed.</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_begin (int): The starting year for the analysis.</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_end (int): The ending year for the analysis.</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">    - plotly.graph_objs._figure.Figure: A Plotly figure object with a line plot for each season,</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co">      where each line represents the average temperature trend and is annotated with the slope</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co">      and p-value from a linear regression model.</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> seasons_database(db_file, country, year_begin, year_end)</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.groupby([<span class="st">'Year'</span>,<span class="st">'Seasons'</span>])[<span class="st">'Temp'</span>].<span class="bu">apply</span>(np.mean)</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.reset_index()</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> go.Figure()</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each season, fit a lin reg model</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> season <span class="kw">in</span> df[<span class="st">'Seasons'</span>].unique():</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>        season_data <span class="op">=</span> df[df[<span class="st">'Seasons'</span>] <span class="op">==</span> season]</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fit the regression model</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> sm.add_constant(season_data[<span class="st">'Year'</span>])</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> sm.OLS(season_data[<span class="st">'Temp'</span>], X).fit()</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the slope and the p-value</span></span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>        slope <span class="op">=</span> model.params[<span class="st">'Year'</span>]</span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>        p_value <span class="op">=</span> model.pvalues[<span class="st">'Year'</span>]</span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># plot</span></span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>        hover_text <span class="op">=</span> <span class="ss">f"Season: </span><span class="sc">{</span>season<span class="sc">}</span><span class="ss">&lt;br&gt;Slope: </span><span class="sc">{</span>slope<span class="sc">:.4f}</span><span class="ss">&lt;br&gt;p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4g}</span><span class="ss">"</span></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(go.Scatter(</span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>season_data[<span class="st">'Year'</span>],</span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>season_data[<span class="st">'Temp'</span>],</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>            mode<span class="op">=</span><span class="st">'lines+markers'</span>,</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span>season,</span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>            text<span class="op">=</span>hover_text, </span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>            hoverinfo<span class="op">=</span><span class="st">'text+x+y'</span>  <span class="co"># hover text with the x and y values</span></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>        ))</span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(</span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="ss">f'Seasonal Temperatures of </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">, years </span><span class="sc">{</span>year_begin<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span>year_end<span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>        xaxis_title<span class="op">=</span><span class="st">'Year'</span>,</span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>        yaxis_title<span class="op">=</span><span class="st">'Temperature (°C)'</span>,</span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>        legend_title<span class="op">=</span><span class="st">'Seasons'</span></span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="00b7a507" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> season_plot(<span class="st">'temps.db'</span>, <span class="st">'China'</span>, <span class="dv">1980</span>, <span class="dv">2021</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> season_plot(<span class="st">'temps.db'</span>, <span class="st">'China'</span>, <span class="dv">1980</span>, <span class="dv">2021</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_22.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
