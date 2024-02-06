@@ -191,6 +191,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="simple-message-web-app" class="level2">
 <h2 class="anchored" data-anchor-id="simple-message-web-app">Simple Message Web App</h2>
+<section id="github-repo-url-httpsgithub.comyuki620pic16b_hw3treemasterhw3" class="level3">
+<h3 class="anchored" data-anchor-id="github-repo-url-httpsgithub.comyuki620pic16b_hw3treemasterhw3">GitHub Repo URL: https://github.com/Yuki620/pic16b_hw3/tree/master/HW3</h3>
+</section>
 </section>
 <section id="enable-submissions" class="level2">
 <h2 class="anchored" data-anchor-id="enable-submissions">1. Enable Submissions</h2>
@@ -204,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="base.html" class="level3">
 <h3 class="anchored" data-anchor-id="base.html"><code>base.html</code></h3>
 <p>We construct the <code>base.html</code> template so that we do not need to write the code for the web app title and the 2 navigation links for submitting and viewing messages every single time. <br> We use the css sheet <code>style.css</code> that we wrote for styling.</p>
-<div id="7b5af8ba" class="cell">
+<div id="5d579c72" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;!</span>DOCTYPE html<span class="op">&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>html<span class="op">&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>head<span class="op">&gt;</span></span>
@@ -234,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="submit.html" class="level3">
 <h3 class="anchored" data-anchor-id="submit.html"><code>submit.html</code></h3>
 <p>Our <code>submit.html</code> is a child template of <code>base.html</code>, and it gives us the page for submitting messages. <br> There is an input text box for the message, and another one for the handle/name. <br> On the bottom, there is a submission button.</p>
-<div id="353e39cf" class="cell">
+<div id="2f46f702" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;!</span>DOCTYPE html<span class="op">&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>html<span class="op">&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>body<span class="op">&gt;</span></span>
@@ -265,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Check whether a table called messages exists in <code>message_db</code>, and create it if not. For this purpose, the SQL command <code>CREATE TABLE IF NOT EXISTS</code> is helpful. Give the table a <code>handle</code> column (text), and a <code>message</code> column (text). <br></li>
 <li>Return the connection <code>g.message_db.</code></li>
 </ol>
-<div id="3a3739a2" class="cell" data-execution_count="1">
+<div id="de634b91" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_message_db():</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># see if message_db exists already</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span>:</span>
@@ -290,13 +293,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Extract the message and the handle from request. You’ll need to ensure that your submit.html template creates these fields from user input by appropriately specifying the name of the input elements. For example:</li>
 </ol>
-<div id="e6f1489c" class="cell">
+<div id="4125a28f" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="bu">input</span> <span class="bu">type</span><span class="op">=</span><span class="st">"text"</span> name<span class="op">=</span><span class="st">"message"</span> <span class="bu">id</span><span class="op">=</span><span class="st">"message"</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>is what I used in my template to ensure that <code>request.form["message"]</code> contained the message input by the user. You should then return the message and the handle.</p>
 <p>Using a cursor, insert the message into the message database. Remember that you’ll need to provide the handle and the message itself. You’ll need to write a SQL command to perform the insertion.</p>
 <p><strong>Note:</strong> when working directly with SQL commands, it is necessary to run <code>db.commit()</code> after inserting a row into db in order to ensure that your row insertion has been saved. Also, don’t forget to close the database connection!</p>
-<div id="679d7bcd" class="cell" data-execution_count="3">
+<div id="6fa818b4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_message(request):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract message and handle from the form data</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    msg <span class="op">=</span> request.form[<span class="st">"message"</span>]</span>
@@ -325,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="write-a-function-to-render_template-the-submit.html-template." class="level3">
 <h3 class="anchored" data-anchor-id="write-a-function-to-render_template-the-submit.html-template.">Write a function to <code>render_template()</code> the <code>submit.html</code> template.</h3>
 <p>Since this page will both transmit and receive data, you should ensure that it supports both <code>POST</code> and <code>GET</code> methods, and give it appropriate behavior in each one. In the <code>GET</code> case, you can just render the <code>submit.html</code> template with no other parameters. In the <code>POST</code> case, you should call <code>insert_message()</code> (and then render the <code>submit.html</code> template).</p>
-<div id="459a5148" class="cell">
+<div id="262d606f" class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">@app.route</span>(<span class="st">'/'</span>, methods<span class="op">=</span>[<span class="st">'POST'</span>, <span class="st">'GET'</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> submit():</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># GET is to request data from a specified resource</span></span>
@@ -343,7 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="write-the-function-random_messagesn" class="level3">
 <h3 class="anchored" data-anchor-id="write-the-function-random_messagesn">Write the function <code>random_messages(n)</code></h3>
 <p><code>random_messages(n)</code> will return a collection of n random messages from the <code>message_db</code>, or fewer if necessary. Don’t forget to close the database connection within the function!</p>
-<div id="ff4b3c60" class="cell" data-execution_count="4">
+<div id="d8d9df49" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> random_messages(n):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Connect to the database</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    db <span class="op">=</span> get_message_db()</span>
@@ -365,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="view.html" class="level3">
 <h3 class="anchored" data-anchor-id="view.html"><code>view.html</code></h3>
 <p>Next, write a new template called <code>view.html</code> to display the messages extracted from <code>random_messages(n)</code>. This page will display <code>n</code> randomly chosen submitted messages and the corresponding handles/names.</p>
-<div id="e6e893ef" class="cell">
+<div id="b78ee82a" class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;!</span>DOCTYPE html<span class="op">&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>html<span class="op">&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>body<span class="op">&gt;</span></span>
@@ -385,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="write-a-function-to-render-view.html" class="level3">
 <h3 class="anchored" data-anchor-id="write-a-function-to-render-view.html">Write a function to render <code>view.html</code></h3>
 <p>This function should first call <code>random_messages(n)</code> to grab some random messages (I chose a cap of 5), and then pass these messages as an argument to <code>render_template()</code>.</p>
-<div id="300e2d81" class="cell">
+<div id="9c86ff8d" class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">@app.route</span>(<span class="st">'/view/'</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> view():</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get the messages and display on view</span></span>
