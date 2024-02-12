@@ -9,7 +9,7 @@
 <meta name="author" content="Yuki Yu">
 <meta name="dcterms.date" content="2024-01-28">
 
-<title>UCLA PIC 16B Lec 1, Winter 2024 - HW 2</title>
+<title>UCLA PIC 16B Lec 1, Winter 2024 - Web Scraping TMDB - ‘Wonka’</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">HW 2</h1>
+      <h1 class="title">Web Scraping TMDB - ‘Wonka’</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Week 3</div>
                 <div class="quarto-category">Homework</div>
@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="web-scraping-tmdb---wonka" class="level2">
 <h2 class="anchored" data-anchor-id="web-scraping-tmdb---wonka">Web Scraping TMDB - “Wonka”</h2>
-<div id="07801fb1" class="cell" data-execution_count="1">
+<div id="07801fb1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -230,7 +230,7 @@ cd TMDB_scraper</code></pre>
 <section id="tweak-settings" class="level3">
 <h3 class="anchored" data-anchor-id="tweak-settings">1.4 Tweak Settings</h3>
 <p>For now, add the following line to the file settings.py:</p>
-<div id="1c7f0329" class="cell" data-execution_count="27">
+<div id="1c7f0329" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>CLOSESPIDER_PAGECOUNT <span class="op">=</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This line just prevents your scraper from downloading too much data while you’re still testing things out. You’ll remove this line later.</p>
@@ -241,7 +241,7 @@ cd TMDB_scraper</code></pre>
 <p><strong>Installed <code>scrapy_fake_useragent</code></strong> <br> Make sure that it is installed in the correct environment and location. <br></p>
 <p><strong>Add the following lines in <code>settings.py</code></strong></p>
 <p>This setting is used to specify the amount of time (in seconds) that the scraper should wait before downloading consecutive pages from the same website. A DOWNLOAD_DELAY helps in mimicking human browsing behavior more closely and reduces the risk of getting banned or blocked by the website’s server for sending too many requests too quickly.</p>
-<div id="8b22f264" class="cell" data-execution_count="28">
+<div id="8b22f264" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>DOWNLOAD_DELAY <span class="op">=</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Some websites use cookies to detect and block scrapers. If the website’s functionality you are scraping does not require cookies, disabling them can simplify your scraping process. Setting COOKIES_ENABLED to False turns off cookie handling, meaning your scraper won’t send or receive any cookies with the requests.</p>
