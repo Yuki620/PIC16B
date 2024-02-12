@@ -786,10 +786,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_17.html" frameborder="0" allowfullscreen=""></iframe>
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_4.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
 </div>
-<div id="31381edd" class="cell" data-execution_count="26">
+<div id="31381edd" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> px.colors.diverging.Tealrose <span class="co"># choose a colormap</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> temperature_coefficient_plot(<span class="st">"temps.db"</span>, <span class="st">"Germany"</span>, <span class="dv">1992</span>, <span class="dv">2016</span>, <span class="dv">1</span>, </span>
@@ -800,7 +800,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_26.html" frameborder="0" allowfullscreen=""></iframe>
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_4.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
 </div>
 </section>
@@ -818,7 +818,7 @@ hemisphere?</code></pre>
 <li><code>year_begin</code> and <code>year_end</code>: two integers giving the earliest and latest years for which should be returned.</li>
 </ul>
 <p>The output should be a barplot grouped by year that shows the given country’s average temperature over thoughout the year. It should also be overlayed by a line plot that shows each year’s average temperature of the hemisphere the country is located in to see if the country’s average temperatures follows the pattern/trend of the average temperature of its hemisphere.</p>
-<div id="88dcb1d5" class="cell" data-scrolled="true" data-execution_count="18">
+<div id="88dcb1d5" class="cell" data-scrolled="true" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> climate_database <span class="im">import</span> seasons_database</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objs <span class="im">as</span> go</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the function</span></span>
@@ -870,7 +870,7 @@ hemisphere?</code></pre>
 </code></pre>
 </div>
 </div>
-<div id="2c7e9d31" class="cell" data-execution_count="19">
+<div id="2c7e9d31" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> country_to_hemisphere_plot(db_file, country, year_begin, year_end):</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Creates a visualization comparing the average temperature of a specified country </span></span>
@@ -921,11 +921,11 @@ hemisphere?</code></pre>
 <span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span>
 <span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3e607bd3" class="cell" data-scrolled="true" data-execution_count="20">
+<div id="3e607bd3" class="cell" data-scrolled="true" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> country_to_hemisphere_plot(<span class="st">"temps.db"</span>, <span class="st">'India'</span>, <span class="dv">2016</span>, <span class="dv">2018</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_20.html" frameborder="0" allowfullscreen=""></iframe>
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_4.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
 </div>
 </section>
@@ -940,70 +940,75 @@ country?</code></pre>
 <li><code>year_begin</code> and <code>year_end</code>: two integers giving the earliest and latest years for which should be returned.</li>
 </ul>
 <p>The output should be a line plot that shows how the temperature of the country changes throughout the years for all 4 seasons (one line for each season). You should also be able to see the season, slope, and p-value of each line as you hover above it.</p>
-<div id="dea2539a" class="cell" data-execution_count="21">
+<div id="a89ed42f" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> season_plot(db_file, country, year_begin, year_end):</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Generates a line plot showing seasonal temperature changes over years for a given country.</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Analyzes average temperature data by season and visualizes trends using linear regression</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">    models. Each season's line plot includes annotations for the slope and p-value, indicating</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">    the rate of temperature change and statistical significance.</span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">    - db_file (str): Path to the SQLite database file.</span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">    - country (str): The country for which temperature data is analyzed.</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_begin (int): The starting year for the analysis.</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_end (int): The ending year for the analysis.</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">    - plotly.graph_objs._figure.Figure: A Plotly figure object with a line plot for each season,</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co">      where each line represents the average temperature trend and is annotated with the slope</span></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co">      and p-value from a linear regression model.</span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> seasons_database(db_file, country, year_begin, year_end)</span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.groupby([<span class="st">'Year'</span>,<span class="st">'Seasons'</span>])[<span class="st">'Temp'</span>].<span class="bu">apply</span>(np.mean)</span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.reset_index()</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotly.subplots <span class="im">import</span> make_subplots</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> season_plot(db_file, country, year_begin, year_end):</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Creates a multifaceted line plot of average seasonal temperatures.</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">    For each season, a subplot is generated showing the trend of average temperatures over</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">    the years with annotations for the linear regression slope and the p-value. The figure</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">    consists of one subplot for each season, allowing for comparison across seasons within</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">    the specified year range for the given country.</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">    - db_file (str): Path to the SQLite database file containing temperature data.</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">    - country (str): Country name for which the temperature data is to be analyzed.</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_begin (int): The starting year for the analysis.</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">    - year_end (int): The ending year for the analysis.</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="co">    - plotly.graph_objs._figure.Figure: A Plotly figure object with subplots for each season.</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> seasons_database(db_file, country, year_begin, year_end)</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.groupby([<span class="st">'Year'</span>, <span class="st">'Seasons'</span>])[<span class="st">'Temp'</span>].mean().reset_index()</span>
 <span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> go.Figure()</span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each season, fit a lin reg model</span></span>
-<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> season <span class="kw">in</span> df[<span class="st">'Seasons'</span>].unique():</span>
-<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>        season_data <span class="op">=</span> df[df[<span class="st">'Seasons'</span>] <span class="op">==</span> season]</span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fit the regression model</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    seasons <span class="op">=</span> df[<span class="st">'Seasons'</span>].unique()</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> make_subplots(rows<span class="op">=</span><span class="dv">2</span>, cols<span class="op">=</span><span class="dv">2</span>, subplot_titles<span class="op">=</span>seasons)</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>    row_col_pairs <span class="op">=</span> [(i <span class="op">//</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>, i <span class="op">%</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seasons))]</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> season, (row, col) <span class="kw">in</span> <span class="bu">zip</span>(seasons, row_col_pairs):</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>        season_data <span class="op">=</span> df[df[<span class="st">'Seasons'</span>] <span class="op">==</span> season]</span>
 <span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> sm.add_constant(season_data[<span class="st">'Year'</span>])</span>
 <span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> sm.OLS(season_data[<span class="st">'Temp'</span>], X).fit()</span>
-<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the slope and the p-value</span></span>
-<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>        slope <span class="op">=</span> model.params[<span class="st">'Year'</span>]</span>
-<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>        p_value <span class="op">=</span> model.pvalues[<span class="st">'Year'</span>]</span>
-<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># plot</span></span>
-<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>        hover_text <span class="op">=</span> <span class="ss">f"Season: </span><span class="sc">{</span>season<span class="sc">}</span><span class="ss">&lt;br&gt;Slope: </span><span class="sc">{</span>slope<span class="sc">:.4f}</span><span class="ss">&lt;br&gt;p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4g}</span><span class="ss">"</span></span>
-<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(go.Scatter(</span>
-<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>season_data[<span class="st">'Year'</span>],</span>
-<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>season_data[<span class="st">'Temp'</span>],</span>
-<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>            mode<span class="op">=</span><span class="st">'lines+markers'</span>,</span>
-<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span>season,</span>
-<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>            text<span class="op">=</span>hover_text, </span>
-<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>            hoverinfo<span class="op">=</span><span class="st">'text+x+y'</span>  <span class="co"># hover text with the x and y values</span></span>
-<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>        ))</span>
-<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(</span>
-<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="ss">f'Seasonal Temperatures of </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">, years </span><span class="sc">{</span>year_begin<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span>year_end<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>        xaxis_title<span class="op">=</span><span class="st">'Year'</span>,</span>
-<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>        yaxis_title<span class="op">=</span><span class="st">'Temperature (°C)'</span>,</span>
-<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>        legend_title<span class="op">=</span><span class="st">'Seasons'</span></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>        slope <span class="op">=</span> model.params[<span class="st">'Year'</span>]</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>        p_value <span class="op">=</span> model.pvalues[<span class="st">'Year'</span>]</span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>        hover_text <span class="op">=</span> <span class="ss">f"Slope: </span><span class="sc">{</span>slope<span class="sc">:.4f}</span><span class="ss">&lt;br&gt;p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4g}</span><span class="ss">"</span></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(go.Scatter(</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>season_data[<span class="st">'Year'</span>],</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>season_data[<span class="st">'Temp'</span>],</span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>            mode<span class="op">=</span><span class="st">'lines+markers'</span>,</span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span>season,</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>            text<span class="op">=</span>hover_text, </span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>            hoverinfo<span class="op">=</span><span class="st">'text+x+y'</span></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>        ), row<span class="op">=</span>row, col<span class="op">=</span>col)</span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(</span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="ss">f'Seasonal Temperatures of </span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">, years </span><span class="sc">{</span>year_begin<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span>year_end<span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>        xaxis_title<span class="op">=</span><span class="st">'Year'</span>,</span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>        yaxis_title<span class="op">=</span><span class="st">'Temperature (°C)'</span>,</span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>        legend_title<span class="op">=</span><span class="st">'Seasons'</span>,</span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>        height<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>        width<span class="op">=</span><span class="dv">800</span></span>
 <span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update xaxis and yaxis properties if needed</span></span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a>    fig.update_xaxes(title_text<span class="op">=</span><span class="st">"Year"</span>, row<span class="op">=</span>row, col<span class="op">=</span>col)</span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a>    fig.update_yaxes(title_text<span class="op">=</span><span class="st">"Temperature (°C)"</span>, row<span class="op">=</span>row, col<span class="op">=</span>col)</span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="00b7a507" class="cell" data-execution_count="22">
+<div id="00b7a507" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> season_plot(<span class="st">'temps.db'</span>, <span class="st">'China'</span>, <span class="dv">1980</span>, <span class="dv">2021</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_22.html" frameborder="0" allowfullscreen=""></iframe>
+<iframe scrolling="no" width="820px" height="820" src="iframe_figures/figure_4.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
 </div>
 <p>From this plot, we see that China has been getting warmer over the years for fall, spring, and summer. All 3 seasons have a positive slope with an extremely small p-value, indicating that this increase in temperature is significant. Though China’s winters have a negative slope, it’s p-value is relatively large at approximately 0.5, making this result insignificant.</p>
