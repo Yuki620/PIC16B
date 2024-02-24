@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Yuki Yu’s Portfolio</title>
+<title>Yuki Yu’s Portfolio - Work and Experience</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,73 +66,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -153,7 +93,7 @@ window.Quarto = {
 <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./experiences.html"> 
+    <a class="nav-link active" href="./experiences.html" aria-current="page"> 
 <span class="menu-text">Work and Experience</span></a>
   </li>  
   <li class="nav-item compact">
@@ -174,226 +114,105 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Yuki Yu’s Portfolio</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Homework">Homework <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Week 0">Week 0 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Week 1">Week 1 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Week 3">Week 3 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Week 5">Week 5 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Week 7">Week 7 <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Work and Experience</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
 
+<section id="education" class="level1">
+<h1>Education</h1>
+<p>Detail your educational background.</p>
+<section id="degree-1" class="level2">
+<h2 class="anchored" data-anchor-id="degree-1">Degree 1</h2>
+<ul>
+<li>Institution</li>
+<li>Major/Program</li>
+<li>Noteworthy accomplishments</li>
+</ul>
+</section>
+<section id="degree-2" class="level2">
+<h2 class="anchored" data-anchor-id="degree-2">Degree 2</h2>
+<ul>
+<li>Institution</li>
+<li>Major/Program</li>
+<li>Noteworthy accomplishments</li>
+</ul>
+</section>
+</section>
+<section id="certifications-and-skills" class="level1">
+<h1>Certifications and Skills</h1>
+<p>List any certifications, skills, or tools that you’re proficient in.</p>
+<ul>
+<li>Certification or Skill 1</li>
+<li>Certification or Skill 2</li>
+<li>Certification or Skill 3</li>
+</ul>
+</section>
+<section id="work-and-experience" class="level1">
+<h1>Work and Experience</h1>
+<p>Describe your professional background here. You can use different levels of headings to organize your content.</p>
+<section id="job-title-1-at-company-1" class="level2">
+<h2 class="anchored" data-anchor-id="job-title-1-at-company-1">Job Title 1 at Company 1</h2>
+<ul>
+<li>Responsibility 1</li>
+<li>Responsibility 2</li>
+<li>Achievement or project you’re proud of</li>
+</ul>
+</section>
+<section id="job-title-2-at-company-2" class="level2">
+<h2 class="anchored" data-anchor-id="job-title-2-at-company-2">Job Title 2 at Company 2</h2>
+<ul>
+<li>Responsibility 1</li>
+<li>Responsibility 2</li>
+<li>Achievement or project you’re proud of</li>
+</ul>
+</section>
+</section>
+<section id="relevant-projects" class="level1">
+<h1>Relevant Projects</h1>
+<p>Discuss any relevant projects that you’ve worked on. Be sure to highlight the impact and your contributions.</p>
+<section id="project-title-1" class="level2">
+<h2 class="anchored" data-anchor-id="project-title-1">Project Title 1</h2>
+<p>Description of the project, your role, technologies used, and any outcomes or achievements.</p>
+</section>
+<section id="project-title-2" class="level2">
+<h2 class="anchored" data-anchor-id="project-title-2">Project Title 2</h2>
+<p>Description of the project, your role, technologies used, and any outcomes or achievements.</p>
+</section>
+</section>
+<section id="download-my-cv" class="level1">
+<h1><a href="https://drive.google.com/file/d/1esn_ltMOc8O9mNaI-oJxIlAsL_dxI0U0/view?usp=sharing">Download My CV</a></h1>
+<p>Click the link above to download my full CV.</p>
+</section>
+<section id="contact" class="level1">
+<h1>Contact</h1>
+<p>Feel free to <a href="mailto:20yuchi@gmail.com">contact me</a> for any professional inquiries.</p>
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Week 7,Homework" data-listing-date-sort="1708416000000" data-listing-file-modified-sort="1708560027445" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="735">
-<div class="thumbnail">
-<p><a href="./posts/Homework_4/index.html" class="no-external"></a></p><a href="./posts/Homework_4/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/Homework_4/index_files/figure-html/cell-6-output-2.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Homework_4/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Homework_4/index.html" class="no-external">Heat Diffusion</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Homework_4/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Week 7'); return false;">
-Week 7
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Homework'); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Homework_4/index.html" class="no-external"><span class="math display">\[x_i = i \Delta x, \; y_j = j \Delta y, \; t_k = k \Delta t,\]</span> for <span class="math inline">\(i = 0, \dots, N-1; \; j=0, \dots, N-1; \; and \; k = 0, 1, 2 \dots\)</span></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Homework_4/index.html" class="no-external">
-<div class="listing-date">
-Feb 20, 2024
-</div>
-<div class="listing-author">
-Yuki Yu
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Week 5,Homework" data-listing-date-sort="1707120000000" data-listing-file-modified-sort="1707706924144" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="626">
-<div class="thumbnail">
-<p><a href="./posts/Homework3/index.html" class="no-external"></a></p><a href="./posts/Homework3/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/Homework3/screencap1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Homework3/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Homework3/index.html" class="no-external">Simple Message Web App</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Homework3/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Week 5'); return false;">
-Week 5
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Homework'); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Homework3/index.html" class="no-external">First, create a submit template with three user interface elements:</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Homework3/index.html" class="no-external">
-<div class="listing-date">
-Feb 5, 2024
-</div>
-<div class="listing-author">
-Yuki Yu
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Week 3,Homework" data-listing-date-sort="1706428800000" data-listing-file-modified-sort="1707709399375" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="888">
-<div class="thumbnail">
-<p><a href="./posts/Homework2/index.html" class="no-external"></a></p><a href="./posts/Homework2/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/Homework2/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Homework2/index.html" class="no-external">Web Scraping TMDB - ‘Wonka’</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Homework2/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Week 3'); return false;">
-Week 3
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Homework'); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Homework2/index.html" class="no-external">Pick your favorite movie, and locate its TMDB page by searching on https://www.themoviedb.org/. For example, I like the movie Wonka. Its TMDB page is at:</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Homework2/index.html" class="no-external">
-<div class="listing-date">
-Jan 28, 2024
-</div>
-<div class="listing-author">
-Yuki Yu
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="Week 1,Homework" data-listing-date-sort="1705564800000" data-listing-file-modified-sort="1707710237832" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="995">
-<div class="thumbnail">
-<p><a href="./posts/Homework1/index.html" class="no-external"></a></p><a href="./posts/Homework1/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/Homework1/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Homework1/index.html" class="no-external">Global Climate Over Time: Temperature Trends by Country</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Homework1/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Week 1'); return false;">
-Week 1
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Homework'); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Homework1/index.html" class="no-external">First, we will create a database called <code>temps.db</code> as shown below, and then read in the csv file as an iterator that gives a dataframe with up to 100,000 rows each iteration…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Homework1/index.html" class="no-external">
-<div class="listing-date">
-Jan 18, 2024
-</div>
-<div class="listing-author">
-Yuki Yu
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Week 0,Homework" data-listing-date-sort="1704700800000" data-listing-file-modified-sort="1705637406642" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="177">
-<div class="thumbnail">
-<p><a href="./posts/Homework0/index.html" class="no-external"></a></p><a href="./posts/Homework0/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/Homework0/index_files/figure-html/cell-5-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Homework0/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Homework0/index.html" class="no-external">HW 0</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Homework0/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Week 0'); return false;">
-Week 0
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Homework'); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Homework0/index.html" class="no-external">In this tutorial, we will be plotting a scatterplot between the Palmer Penguins’ flipper lengths and body mass to see how they compare and differ across the 3 species.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Homework0/index.html" class="no-external">
-<div class="listing-date">
-Jan 8, 2024
-</div>
-<div class="listing-author">
-Yuki Yu
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
