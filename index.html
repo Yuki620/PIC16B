@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Yuki Yu">
+<meta name="dcterms.date" content="2024-02-20">
 
-<title>Yuki Yu’s Portfolio</title>
+<title>Heat Diffusion</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,83 +22,53 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -128,232 +100,503 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="fullcontent">
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Yuki Yu’s Portfolio</span>
-    </a>
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Heat Diffusion</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Week 7</div>
+    <div class="quarto-category">Homework</div>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About Me</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/Yuki620"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/chi-yuki-yu-ab64171a8/"> <i class="bi bi-linkedin" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Yuki Yu’s Portfolio</h1>
-                      </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuki Yu </p>
+          </div>
   </div>
     
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 20, 2024</p>
     </div>
-    
+  </div>
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="two-dimensional-heat-diffusion" class="level2">
+<h2 class="anchored" data-anchor-id="two-dimensional-heat-diffusion">Two-Dimensional Heat Diffusion</h2>
+<section id="heat-equation" class="level4">
+<h4 class="anchored" data-anchor-id="heat-equation">Heat Equation:</h4>
+<div style="font-size: 15px">
+<span class="math display">\[\frac{\partial f(x, t)}{\partial t} = \frac{\partial^2f}{\partial x^2} + \frac{\partial^2f}{\partial y^2}\]</span>
+</div>
+</section>
+<section id="variables" class="level4">
+<h4 class="anchored" data-anchor-id="variables">Variables:</h4>
+<p><span class="math display">\[x_i = i \Delta x, \; y_j = j \Delta y, \; t_k = k \Delta t,\]</span> for <span class="math inline">\(i = 0, \dots, N-1; \; j=0, \dots, N-1; \; and \; k = 0, 1, 2 \dots\)</span></p>
+</section>
+<section id="update-equation-discrete-approximation" class="level4">
+<h4 class="anchored" data-anchor-id="update-equation-discrete-approximation">Update Equation (Discrete Approximation):</h4>
+<p><span class="math display">\[u^{k+1}_{i,j} \approx u^{k}_{i,j} + \epsilon \left( u^{k}_{i+1,j} + u^{k}_{i-1,j} + u^{k}_{i,j+1} + u^{k}_{i,j-1} - 4u^{k}_{i,j} \right)
+\]</span> where <span class="math inline">\(\epsilon\)</span> is a small parameter.</p>
+</section>
+<section id="boundary-conditions" class="level4">
+<h4 class="anchored" data-anchor-id="boundary-conditions">Boundary Conditions:</h4>
+<p><span class="math display">\[u^k_{-1,j} = u^k_{N,j} \quad u^k_{i,-1} = u^k_{i,N} = 0
+\]</span></p>
+<div id="cell-2" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">0.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="with-matrix-multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="with-matrix-multiplication">1. With Matrix Multiplication</h3>
+<p>As in the linear algebra lecture, let’s use matrix-vector multiplication to simulate the heat diffusion in the 2D space. The vector here is created by <code>flattening</code> the current solution . Each iteration of the update is given by: #### <code>advance_time_matvecmul</code></p>
+<div id="cell-4" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> heat_equation <span class="im">import</span> advance_time_matvecmul</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> inspect</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(advance_time_matvecmul))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>def advance_time_matvecmul(A, u, epsilon):
+    """Advances the simulation by one timestep, via matrix-vector multiplication
+    Args:
+        A: The 2d finite difference matrix
+        u: N x N grid state at timestep k
+        epsilon: stability constant
+
+    Returns:
+        N x N Grid state at timestep k+1
+    """
+    N = u.shape[0]
+    u = u + epsilon * (A @ u.flatten()).reshape((N, N))
+    return u
+</code></pre>
+</div>
+</div>
+<section id="matrix-a" class="level4">
+<h4 class="anchored" data-anchor-id="matrix-a">Matrix A:</h4>
+<p>Matrix A is a finite difference matrix, which is used in numerical methods to solve partial differential equations like the heat equation on a discrete grid. - The main diagonal of A (with entries of -4) corresponds to the current point on the temperature grid, accounting for the four neighbors each point has in the grid (in a non-boundary position).</p>
+<ul>
+<li><p>The diagonals immediately above and below the main diagonal (with entries of 1) represent the left and right neighbors in the grid, respectively.</p></li>
+<li><p>The diagonals N steps away from the main diagonal (also with entries of 1) represent the top and bottom neighbors in the grid.</p></li>
+</ul>
+<div id="cell-6" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> N <span class="op">*</span> N</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>diagonals <span class="op">=</span> [<span class="op">-</span><span class="dv">4</span> <span class="op">*</span> np.ones(n), np.ones(n<span class="op">-</span><span class="dv">1</span>), np.ones(n<span class="op">-</span><span class="dv">1</span>), np.ones(n<span class="op">-</span>N), np.ones(n<span class="op">-</span>N)]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>diagonals[<span class="dv">1</span>][(N<span class="op">-</span><span class="dv">1</span>)::N] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>diagonals[<span class="dv">2</span>][(N<span class="op">-</span><span class="dv">1</span>)::N] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.diag(diagonals[<span class="dv">0</span>]) <span class="op">+</span> np.diag(diagonals[<span class="dv">1</span>], <span class="dv">1</span>) <span class="op">+</span> np.diag(diagonals[<span class="dv">2</span>], <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> np.diag(diagonals[<span class="dv">3</span>], N) <span class="op">+</span> np.diag(diagonals[<span class="dv">4</span>], <span class="op">-</span>N)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>array([[-4.,  1.,  0., ...,  0.,  0.,  0.],
+       [ 1., -4.,  1., ...,  0.,  0.,  0.],
+       [ 0.,  1., -4., ...,  0.,  0.,  0.],
+       ...,
+       [ 0.,  0.,  0., ..., -4.,  1.,  0.],
+       [ 0.,  0.,  0., ...,  1., -4.,  1.],
+       [ 0.,  0.,  0., ...,  0.,  1., -4.]])</code></pre>
+</div>
+</div>
+</section>
+<section id="get_a" class="level4">
+<h4 class="anchored" data-anchor-id="get_a"><code>get_A</code></h4>
+<div id="cell-8" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> heat_equation <span class="im">import</span> get_A</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(get_A))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>def get_A(N): 
+    """
+    Generates the matrix A used in the finite difference scheme of the 2D heat equation.
+    
+    Args:
+        N (int): The dimension of the square grid.
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Homework">Homework <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Week 0">Week 0 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Week 1">Week 1 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Week 3">Week 3 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Week 5">Week 5 <span class="quarto-category-count">(1)</span></div></div></div>
-<!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+    Returns:
+        np.ndarray: A square matrix of size N^2 x N^2 representing the discretized Laplacian operator with Dirichlet boundary conditions.
+    """
+    # Total number of points
+    n = N * N
+    diagonals = [-4 * np.ones(n), np.ones(n-1), np.ones(n-1), np.ones(n-N), np.ones(n-N)]
+    diagonals[1][(N-1)::N] = 0
+    diagonals[2][(N-1)::N] = 0
+    A = np.diag(diagonals[0]) + np.diag(diagonals[1], 1) + np.diag(diagonals[2], -1) + np.diag(diagonals[3], N) + np.diag(diagonals[4], -N)
+    return A 
+</code></pre>
+</div>
+</div>
+<div id="cell-9" class="cell" data-scrolled="true" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.random.rand(N, N)  <span class="co"># Initial state (random temperature distribution)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> get_A(N)  <span class="co"># Get the matrix A for our grid size</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare to store intermediate states for visualization</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>intermediate_states <span class="op">=</span> []</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>num_iterations <span class="op">=</span> <span class="dv">2700</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>save_every <span class="op">=</span> <span class="dv">300</span>  <span class="co"># How often to save the state for visualization</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_iterations):</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> advance_time_matvecmul(A, u, epsilon)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save the state every 300 iterations</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> save_every <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        intermediate_states.append(u.copy())</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time()</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># total computation time</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>computation_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total computation time for </span><span class="sc">{</span>num_iterations<span class="sc">}</span><span class="ss"> iterations: </span><span class="sc">{</span>computation_time<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes.flat):</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(intermediate_states):</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        cax <span class="op">=</span> ax.contourf(intermediate_states[i], levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>), cmap<span class="op">=</span>cm.viridis)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f'Iteration </span><span class="sc">{</span>i <span class="op">*</span> save_every<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">'off'</span>)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>fig.subplots_adjust(right<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>cbar_ax <span class="op">=</span> fig.add_axes([<span class="fl">0.85</span>, <span class="fl">0.15</span>, <span class="fl">0.05</span>, <span class="fl">0.7</span>])</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cax, cax<span class="op">=</span>cbar_ax)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total computation time for 2700 iterations: 71.08664393424988 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-6-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As we seen from above, the computation time is actually very slow, so we consider using a sparse matrix as well as a jitted version of a function for higher computational efficiency.</p>
+</section>
+</section>
+<section id="sparse-matrix-in-jax" class="level3">
+<h3 class="anchored" data-anchor-id="sparse-matrix-in-jax">2. Sparse Matrix in JAX</h3>
+<div id="cell-12" class="cell" data-scrolled="true" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax.experimental <span class="im">import</span> sparse</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> grad, jit</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax.config <span class="im">import</span> config</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>config.update(<span class="st">"jax_enable_x64"</span>, <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/11/7r9zjlds5zv03y1vfyk9dx6h0000gn/T/ipykernel_45104/1628035253.py:4: DeprecationWarning: Accessing jax.config via the jax.config submodule is deprecated.
+  from jax.config import config</code></pre>
+</div>
+</div>
+<section id="get_sparse_a" class="level4">
+<h4 class="anchored" data-anchor-id="get_sparse_a"><code>get_sparse_A</code></h4>
+<div id="cell-14" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> heat_equation <span class="im">import</span> get_sparse_A</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(get_sparse_A))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>def get_sparse_A(N):
+    """
+    Generate a sparse matrix representation of the matrix A used for the heat equation.
+    Args:
+        N (int): The dimension of the grid (N x N).
 
+    Returns:
+        A_sp_matrix (BCOO): The sparse matrix representation of A in BCOO format.
+    """
+    n = N * N
+    diagonals = [-4 * jnp.ones(n), jnp.ones(n-1), jnp.ones(n-1), jnp.ones(n-N), jnp.ones(n-N)]
+    diagonals = [diagonals[0], diagonals[1].at[(N-1)::N].set(0), diagonals[2].at[(N-1)::N].set(0), diagonals[3], diagonals[4]]
+    A = jnp.diag(diagonals[0]) + jnp.diag(diagonals[1], 1) + jnp.diag(diagonals[2], -1) + jnp.diag(diagonals[3], N) + jnp.diag(diagonals[4], -N)
+    A_sp_matrix = sparse.BCOO.fromdense(A)
+    return A_sp_matrix
+</code></pre>
+</div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random, jit</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate matrix of shape (N, N) with random values </span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">0</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> random.uniform(key, (N, N))</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>A_sp_matrix <span class="op">=</span> get_sparse_A(N)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># jit advance_time_matvecmul</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>advance_time_matvecmul_jit <span class="op">=</span> jit(advance_time_matvecmul)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare to store intermediate states for visualization</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>intermediate_states <span class="op">=</span> []</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>num_iterations <span class="op">=</span> <span class="dv">2700</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>save_every <span class="op">=</span> <span class="dv">300</span>  <span class="co"># How often to save the state for visualization</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time()</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_iterations):</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> advance_time_matvecmul_jit(A_sp_matrix, u, epsilon)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save the state every 300 iterations</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> save_every <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>        intermediate_states.append(u.copy())</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time()</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co"># total computation time</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>computation_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total computation time for </span><span class="sc">{</span>num_iterations<span class="sc">}</span><span class="ss"> iterations: </span><span class="sc">{</span>computation_time<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes.flat):</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(intermediate_states):</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>        cax <span class="op">=</span> ax.contourf(intermediate_states[i], levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>), cmap<span class="op">=</span>cm.viridis)</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f'Iteration </span><span class="sc">{</span>i <span class="op">*</span> save_every<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">'off'</span>)</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>fig.subplots_adjust(right<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>cbar_ax <span class="op">=</span> fig.add_axes([<span class="fl">0.85</span>, <span class="fl">0.15</span>, <span class="fl">0.05</span>, <span class="fl">0.7</span>])</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cax, cax<span class="op">=</span>cbar_ax)</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total computation time for 2700 iterations: 1.6103532314300537 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-9-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As we seen from above, it now takes less than a second to run our simulations, which is a huge improvement in computational speed and efficiency.</p>
+</section>
+</section>
+<section id="direct-operation-with-numpy" class="level3">
+<h3 class="anchored" data-anchor-id="direct-operation-with-numpy">3. Direct Operation with <code>numpy</code></h3>
+<section id="advance_time_numpy" class="level4">
+<h4 class="anchored" data-anchor-id="advance_time_numpy"><code>advance_time_numpy</code></h4>
+<div id="cell-18" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> heat_equations <span class="im">import</span> advance_time_numpy</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(advance_time_numpy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>def advance_time_numpy(u, epsilon):
+    """
+    Advances the simulation of the heat equation by one time step using NumPy's vectorized operations.
 
+    Args:
+        u (np.ndarray): The current state of the system, an N x N grid.
+        epsilon (float): The stability constant.
 
+    Returns:
+        np.ndarray: The updated state of the system, an N x N grid.
+    """
+    N = u.shape[0]
+    # pad to (N+2)x(N+2) for border conditions 
+    u_padded = np.pad(u, pad_width=1, mode='constant', constant_values=0)
 
+    u_next = u + epsilon * (
+        np.roll(u_padded, shift=-1, axis=0)[1:-1, 1:-1] + # Up cuz shift for -1 is backwards and axis=0 gives row
+        np.roll(u_padded, shift=1, axis=0)[1:-1, 1:-1] + # Down
+        np.roll(u_padded , shift=-1, axis=1)[1:-1, 1:-1] + # Left cuz axix=1 is column
+        np.roll(u_padded, shift=1, axis=1)[1:-1, 1:-1] - # Right
+        4 * u # Center 
+    )
 
+    return u_next
+</code></pre>
+</div>
+</div>
+<div id="cell-19" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.random.rand(N, N)  <span class="co"># Initial state (random temperature distribution)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A = get_A(N)  # Get the matrix A for our grid size</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare to store intermediate states for visualization</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>intermediate_states <span class="op">=</span> []</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>num_iterations <span class="op">=</span> <span class="dv">2700</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>save_every <span class="op">=</span> <span class="dv">300</span>  <span class="co"># How often to save the state for visualization</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time()</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_iterations):</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> advance_time_numpy(u, epsilon)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save the state every 300 iterations</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> save_every <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        intermediate_states.append(u.copy())</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time()</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co"># total computation time</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>computation_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total computation time for </span><span class="sc">{</span>num_iterations<span class="sc">}</span><span class="ss"> iterations: </span><span class="sc">{</span>computation_time<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(intermediate_states))</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes.flat):</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(intermediate_states):</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>        cax <span class="op">=</span> ax.contourf(intermediate_states[i], levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>), cmap<span class="op">=</span>cm.viridis)</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f'Iteration </span><span class="sc">{</span>i <span class="op">*</span> save_every<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">'off'</span>)</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>fig.subplots_adjust(right<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>cbar_ax <span class="op">=</span> fig.add_axes([<span class="fl">0.85</span>, <span class="fl">0.15</span>, <span class="fl">0.05</span>, <span class="fl">0.7</span>])</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cax, cax<span class="op">=</span>cbar_ax)</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total computation time for 2700 iterations: 0.5216138362884521 seconds
+&lt;class 'list'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-11-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="with-jax" class="level3">
+<h3 class="anchored" data-anchor-id="with-jax">3. With <code>jax</code></h3>
+<section id="advance_time_jax" class="level4">
+<h4 class="anchored" data-anchor-id="advance_time_jax"><code>advance_time_jax</code></h4>
+<div id="cell-21" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> heat_equation <span class="im">import</span> advance_time_jax</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(advance_time_jax))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>@jit
+def advance_time_jax(u, epsilon):
+    """
+    Advances the heat distribution on a grid by one time step using JAX for JIT-compiled execution.
 
+    Args:
+        u (jnp.ndarray): The current state of the grid as a 2D JAX array.
+        epsilon (float): The diffusion coefficient.
 
+    Returns:
+        jnp.ndarray: The updated state of the grid as a 2D JAX array.
+    """
+    N = u.shape[0]
+    u_padded = jnp.pad(u, pad_width=1, mode='constant', constant_values=0)
+    u_next = u + epsilon * (
+        jnp.roll(u_padded, shift=-1, axis=0)[1:-1, 1:-1] + # Up cuz shift for -1 is backwards and axis=0 gives row
+        jnp.roll(u_padded, shift=1, axis=0)[1:-1, 1:-1] + # Down
+        jnp.roll(u_padded , shift=-1, axis=1)[1:-1, 1:-1] + # Left cuz axix=1 is column
+        jnp.roll(u_padded, shift=1, axis=1)[1:-1, 1:-1] - # Right
+        4 * u # Center 
+    )
 
+    return u_next
+</code></pre>
+</div>
+</div>
+<div id="cell-22" class="cell" data-scrolled="false" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate matrix of shape (N, N) with random values </span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>key <span class="op">=</span> random.PRNGKey(<span class="dv">0</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> random.uniform(key, (N, N))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare to store intermediate states for visualization</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>intermediate_states <span class="op">=</span> []</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>num_iterations <span class="op">=</span> <span class="dv">2700</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>save_every <span class="op">=</span> <span class="dv">300</span>  <span class="co"># How often to save the state for visualization</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time()</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_iterations):</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> advance_time_jax(u, epsilon)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save the state every 300 iterations</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> save_every <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        intermediate_states.append(u.copy())</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time()</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co"># total computation time</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>computation_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total computation time for </span><span class="sc">{</span>num_iterations<span class="sc">}</span><span class="ss"> iterations: </span><span class="sc">{</span>computation_time<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">15</span>))</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes.flat):</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(intermediate_states):</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>        cax <span class="op">=</span> ax.contourf(intermediate_states[i], levels<span class="op">=</span>np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>), cmap<span class="op">=</span>cm.viridis)</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f'Iteration </span><span class="sc">{</span>i <span class="op">*</span> save_every<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">'off'</span>)</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>fig.subplots_adjust(right<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>cbar_ax <span class="op">=</span> fig.add_axes([<span class="fl">0.85</span>, <span class="fl">0.15</span>, <span class="fl">0.05</span>, <span class="fl">0.7</span>])</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cax, cax<span class="op">=</span>cbar_ax)</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total computation time for 2700 iterations: 0.23972415924072266 seconds</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-13-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="comparison" class="level3">
+<h3 class="anchored" data-anchor-id="comparison">5. Comparison</h3>
+<p><strong>With Matrix Multiplication:</strong> 71.08664393424988 seconds<br>
+<strong>With Sparse Matrix Multiplication:</strong> 1.6103532314300537 seconds<br>
+<strong>Direct Operation with <code>numpy</code>:</strong> 0.5216138362884521 seconds<br>
+<strong>With <code>jax</code>:</strong> 0.23972415924072266 seconds</p>
+<p>As we can see, the first method with matrix multiplication takes a very long time, while the method using direct operation with <code>jax</code> is the fastest by a large margin.</p>
+<p>The comparison of the four methods shows a significant difference in performance:</p>
+<ol type="1">
+<li><p><strong>With Matrix Multiplication</strong>: This method is the slowest because full matrix-vector multiplications are computationally expensive and not optimized for sparse matrices.</p></li>
+<li><p><strong>With Sparse Matrix Multiplication</strong>: Using sparse matrices dramatically improves performance since it takes advantage of the matrix’s sparsity. Sparse matrix libraries are optimized to skip calculations for zero elements, which reduces the computational load.</p></li>
+<li><p><strong>Direct Operation with NumPy</strong>: This method uses NumPy’s optimized vectorized operations, which are faster than explicit matrix multiplication, especially for operations that can be expressed as element-wise computations.</p></li>
+<li><p><strong>With JAX</strong>: This is the fastest method because JAX can further optimize the vectorized operations at the compilation stage, and the compiled code can run on accelerators like GPUs or TPUs.</p></li>
+</ol>
+<p>In terms of ease of writing:</p>
+<ul>
+<li>The <strong>matrix multiplication</strong> method is conceptually straightforward if you are familiar with linear algebra. It directly translates the mathematical expressions into code but can be inefficient in practice.</li>
+<li>The <strong>sparse matrix multiplication</strong> method requires a bit more work to set up since you need to correctly construct the sparse matrix.</li>
+</ul>
+<p>However, both of these methods are harder to write because we need to write a separate function (i.e.&nbsp;<code>get_A</code> and <code>get_A_sparse</code>) to generate the matrix A.</p>
+<ul>
+<li>The <strong>direct operation with NumPy</strong> method can be easier to write if you are comfortable with NumPy’s array operations. It also avoids the complexity of setting up a matrix multiplication.</li>
+<li>The <strong>JAX</strong> method is similar in complexity to the NumPy one, but you need to ensure that the operations are compatible with JAX’s requirements (no in-place updates, use of <code>jnp</code> instead of <code>np</code>, etc.).</li>
+</ul>
+<p>Overall, the JAX method offers the best performance due to JIT compilation and potential hardware acceleration. In terms of ease of writing, it is comparable to the direct NumPy method once you are familiar with JAX’s constraints and operation.</p>
+<p>The best method for a given problem often depends on the specific context and requirements. If execution speed is the highest priority and the code will be run repeatedly, JAX is an excellent choice. If ease of implementation and readability are more critical, and performance is less of an issue, the direct NumPy method might be preferred.</p>
+</section>
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Week 5,Homework" data-listing-date-sort="1707120000000" data-listing-file-modified-sort="1707706924144" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="626">
-<div class="thumbnail">
-<p><a href="./posts/Homework3/index.html" class="no-external"></a></p><a href="./posts/Homework3/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/Homework3/screencap1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Homework3/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Homework3/index.html" class="no-external">Simple Message Web App</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Homework3/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Week 5'); return false;">
-Week 5
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Homework'); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Homework3/index.html" class="no-external">First, create a submit template with three user interface elements:</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Homework3/index.html" class="no-external">
-<div class="listing-date">
-Feb 5, 2024
-</div>
-<div class="listing-author">
-Yuki Yu
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Week 3,Homework" data-listing-date-sort="1706428800000" data-listing-file-modified-sort="1707709399375" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="888">
-<div class="thumbnail">
-<p><a href="./posts/Homework2/index.html" class="no-external"></a></p><a href="./posts/Homework2/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/Homework2/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Homework2/index.html" class="no-external">Web Scraping TMDB - ‘Wonka’</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Homework2/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Week 3'); return false;">
-Week 3
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Homework'); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Homework2/index.html" class="no-external">Pick your favorite movie, and locate its TMDB page by searching on https://www.themoviedb.org/. For example, I like the movie Wonka. Its TMDB page is at:</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Homework2/index.html" class="no-external">
-<div class="listing-date">
-Jan 28, 2024
-</div>
-<div class="listing-author">
-Yuki Yu
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Week 1,Homework" data-listing-date-sort="1705564800000" data-listing-file-modified-sort="1707710237832" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="995">
-<div class="thumbnail">
-<p><a href="./posts/Homework1/index.html" class="no-external"></a></p><a href="./posts/Homework1/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/Homework1/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Homework1/index.html" class="no-external">Global Climate Over Time: Temperature Trends by Country</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Homework1/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Week 1'); return false;">
-Week 1
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Homework'); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Homework1/index.html" class="no-external">First, we will create a database called <code>temps.db</code> as shown below, and then read in the csv file as an iterator that gives a dataframe with up to 100,000 rows each iteration…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Homework1/index.html" class="no-external">
-<div class="listing-date">
-Jan 18, 2024
-</div>
-<div class="listing-author">
-Yuki Yu
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="Week 0,Homework" data-listing-date-sort="1704700800000" data-listing-file-modified-sort="1705637406642" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="177">
-<div class="thumbnail">
-<p><a href="./posts/Homework0/index.html" class="no-external"></a></p><a href="./posts/Homework0/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/Homework0/index_files/figure-html/cell-5-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Homework0/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Homework0/index.html" class="no-external">HW 0</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Homework0/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Week 0'); return false;">
-Week 0
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Homework'); return false;">
-Homework
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Homework0/index.html" class="no-external">In this tutorial, we will be plotting a scatterplot between the Palmer Penguins’ flipper lengths and body mass to see how they compare and differ across the 3 species.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Homework0/index.html" class="no-external">
-<div class="listing-date">
-Jan 8, 2024
-</div>
-<div class="listing-author">
-Yuki Yu
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main>
+<!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
