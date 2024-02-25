@@ -11,49 +11,77 @@
     "href": "experiences.html",
     "title": "Work and Experience",
     "section": "",
-    "text": "Detail your educational background.\n\n\n\nInstitution\nMajor/Program\nNoteworthy accomplishments\n\n\n\n\n\nInstitution\nMajor/Program\nNoteworthy accomplishments"
+    "text": "Honors/Awards: The Big Bang Theory Scholarship\nRelevant Coursework: Data Analysis & Regression, Design & Analysis of Experiment, Probability, Mathematical Statistics, Python, C++ Optimization, Monte Carlo Methods, Statistical Consulting, Statistical Models & Data Mining, Stochastic Processes, Game Theory, Accounting"
   },
   {
-    "objectID": "experiences.html#degree-1",
-    "href": "experiences.html#degree-1",
+    "objectID": "experiences.html#b.s.-mathematicsapplied-and-b.s.-statistics-ds",
+    "href": "experiences.html#b.s.-mathematicsapplied-and-b.s.-statistics-ds",
     "title": "Work and Experience",
     "section": "",
-    "text": "Institution\nMajor/Program\nNoteworthy accomplishments"
+    "text": "Honors/Awards: The Big Bang Theory Scholarship\nRelevant Coursework: Data Analysis & Regression, Design & Analysis of Experiment, Probability, Mathematical Statistics, Python, C++ Optimization, Monte Carlo Methods, Statistical Consulting, Statistical Models & Data Mining, Stochastic Processes, Game Theory, Accounting"
   },
   {
-    "objectID": "experiences.html#degree-2",
-    "href": "experiences.html#degree-2",
+    "objectID": "experiences.html#technical",
+    "href": "experiences.html#technical",
     "title": "Work and Experience",
-    "section": "",
-    "text": "Institution\nMajor/Program\nNoteworthy accomplishments"
+    "section": "Technical",
+    "text": "Technical\nPython, R, SQL, SAS, C++, MATLAB, Java, Tableau, Microsoft Suite (Word, PowerPoint, Excel)"
   },
   {
-    "objectID": "experiences.html#job-title-1-at-company-1",
-    "href": "experiences.html#job-title-1-at-company-1",
+    "objectID": "experiences.html#languages",
+    "href": "experiences.html#languages",
     "title": "Work and Experience",
-    "section": "Job Title 1 at Company 1",
-    "text": "Job Title 1 at Company 1\n\nResponsibility 1\nResponsibility 2\nAchievement or project you’re proud of"
+    "section": "Languages",
+    "text": "Languages\nEnglish (native), Mandarin Chinese (native), Japanese (Advanced)"
   },
   {
-    "objectID": "experiences.html#job-title-2-at-company-2",
-    "href": "experiences.html#job-title-2-at-company-2",
+    "objectID": "experiences.html#academia-sinica",
+    "href": "experiences.html#academia-sinica",
     "title": "Work and Experience",
-    "section": "Job Title 2 at Company 2",
-    "text": "Job Title 2 at Company 2\n\nResponsibility 1\nResponsibility 2\nAchievement or project you’re proud of"
+    "section": "Academia Sinica",
+    "text": "Academia Sinica"
   },
   {
-    "objectID": "experiences.html#project-title-1",
-    "href": "experiences.html#project-title-1",
+    "objectID": "experiences.html#research-intern",
+    "href": "experiences.html#research-intern",
     "title": "Work and Experience",
-    "section": "Project Title 1",
-    "text": "Project Title 1\nDescription of the project, your role, technologies used, and any outcomes or achievements."
+    "section": "Research Intern",
+    "text": "Research Intern\n\nChecked the validity of a mathematical model of biofilm oscillations presented in a research paper and modified it\nWrote new ODE models and solved them in Python using RK4 and ran simulations in NetLogo to see how the models would behave as individual-based models"
   },
   {
-    "objectID": "experiences.html#project-title-2",
-    "href": "experiences.html#project-title-2",
+    "objectID": "experiences.html#mechanics-bank-auto-finance",
+    "href": "experiences.html#mechanics-bank-auto-finance",
     "title": "Work and Experience",
-    "section": "Project Title 2",
-    "text": "Project Title 2\nDescription of the project, your role, technologies used, and any outcomes or achievements."
+    "section": "Mechanics Bank Auto Finance",
+    "text": "Mechanics Bank Auto Finance"
+  },
+  {
+    "objectID": "experiences.html#auto-risk-analyst",
+    "href": "experiences.html#auto-risk-analyst",
+    "title": "Work and Experience",
+    "section": "Auto Risk Analyst",
+    "text": "Auto Risk Analyst\n\nWorked in the originations scorecard development team to build a higher accuracy scorecard to minimize the overallocation of resources for risk. This would have freed up resources that could be used towards the current expansion of the bank.\nPulled, cleaned, and prepared the data to build the development database for a new custom originations scorecard using SAS, SQL, and Excel\nBuilt a preliminary logistic inference model for the scorecard with SQL and SAS\nBuilt a finalized version of an inference model that will generate loss predictions with more accuracy Mechanics Bank Auto Finance"
+  },
+  {
+    "objectID": "experiences.html#asa-datafest-at-ucla-2023-judges-choice-winner",
+    "href": "experiences.html#asa-datafest-at-ucla-2023-judges-choice-winner",
+    "title": "Work and Experience",
+    "section": "ASA DataFest at UCLA 2023 – Judge’s Choice Winner",
+    "text": "ASA DataFest at UCLA 2023 – Judge’s Choice Winner\n\n48-hour data analytics hackathon with almost undergraduates and 80 teams. This year’s data was on ABA’s Pro Bono Service which provides free legal counseling. Our team won the Judge’s Choice Award for humanizing the data.\nOur team focused on the responsiveness of this service and its client retention rate with added insight from sentiment analysis.\nUsed R, Python, and Tableau to analyze and visualize the data."
+  },
+  {
+    "objectID": "experiences.html#imdb-reviews-sentiment-analysis",
+    "href": "experiences.html#imdb-reviews-sentiment-analysis",
+    "title": "Work and Experience",
+    "section": "IMDB Reviews Sentiment Analysis",
+    "text": "IMDB Reviews Sentiment Analysis\n\nUsed Python to do NLP and conduct sentiment analysis on the movie reviews left on the IMDB website\nExamined various machine learning algorithms such as logistic regression, logistic regression with SGD, KNN, Random Forest, and Decision Trees under both BoW and TF-IDF"
+  },
+  {
+    "objectID": "experiences.html#amazon-price-tracking-bot",
+    "href": "experiences.html#amazon-price-tracking-bot",
+    "title": "Work and Experience",
+    "section": "Amazon Price Tracking Bot",
+    "text": "Amazon Price Tracking Bot\n\nUsed Python to create a bot that checks the price of a product at 8:00 a.m. every Monday, Wednesday, Friday, and Saturday.\nIf the price drops below our target price, then the bot sends an email to notify the user of the price drop.\nUsed BeautifulSoup for web scraping, the SMTP module to send the emails, and crontab to keep the script active."
   },
   {
     "objectID": "posts/Homework0/index.html",
