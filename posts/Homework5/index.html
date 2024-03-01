@@ -294,9 +294,10 @@ Number of test samples: 2326</code></pre>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow <span class="im">import</span> data <span class="im">as</span> tf_data</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">64</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>train_ds <span class="op">=</span> train_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>validation_ds <span class="op">=</span> validation_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>test_ds <span class="op">=</span> test_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># fetch a batch of 64 data points at a time for faster processing time</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>train_ds <span class="op">=</span> train_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>validation_ds <span class="op">=</span> validation_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>test_ds <span class="op">=</span> test_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="working-with-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="working-with-datasets">Working with Datasets</h3>
@@ -348,20 +349,22 @@ Number of test samples: 2326</code></pre>
 <h3 class="anchored" data-anchor-id="check-label-frequencies">Check Label Frequencies</h3>
 <p>The following line of code will create an iterator called <code>labels_iterator</code>.</p>
 <div id="cell-17" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>labels_iterator<span class="op">=</span> train_ds.unbatch().<span class="bu">map</span>(<span class="kw">lambda</span> image, label: label).as_numpy_iterator()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create an iterator: tensorflow to numpy</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>labels_iterator<span class="op">=</span> train_ds.unbatch().<span class="bu">map</span>(<span class="kw">lambda</span> image, label: label).as_numpy_iterator()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-18" class="cell" data-outputid="f87c3ea5-25ae-4cb6-fa4b-f9425221403c" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cat_count <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dog_count <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> labels_iterator:</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    cat_count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    dog_count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of 'cat' images (label 0): </span><span class="sc">{</span>cat_count<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of 'dog' images (label 1): </span><span class="sc">{</span>dog_count<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># count the total number for each label</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> labels_iterator:</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    cat_count <span class="op">+=</span> <span class="dv">1</span> <span class="co"># for cats</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    dog_count <span class="op">+=</span> <span class="dv">1</span> <span class="co"># for dogs</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of 'cat' images (label 0): </span><span class="sc">{</span>cat_count<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of 'dog' images (label 1): </span><span class="sc">{</span>dog_count<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of 'cat' images (label 0): 4637
 Number of 'dog' images (label 1): 4669</code></pre>
@@ -371,8 +374,10 @@ Number of 'dog' images (label 1): 4669</code></pre>
 <div id="cell-20" class="cell" data-outputid="60891efa-c081-4f3a-e4cb-ec37bfb2999b" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>total_images <span class="op">=</span> cat_count <span class="op">+</span> dog_count</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>most_frequent_label <span class="op">=</span> <span class="bu">max</span>(cat_count, dog_count)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>baseline_accuracy <span class="op">=</span> most_frequent_label <span class="op">/</span> total_images</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>baseline_accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># baseline goes w/ most frequent label </span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># --&gt; its accuracy is the proportion of the most frequent label out of the total</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>baseline_accuracy <span class="op">=</span> most_frequent_label <span class="op">/</span> total_images</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>baseline_accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="57">
 <pre><code>0.501719320868257</code></pre>
 </div>
@@ -401,9 +406,9 @@ Number of 'dog' images (label 1): 4669</code></pre>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    layers.Conv2D(<span class="dv">32</span>, (<span class="dv">3</span>,<span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>),</span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    layers.MaxPooling2D((<span class="dv">3</span>,<span class="dv">3</span>)),</span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    layers.Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>,<span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    layers.Flatten(),</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    layers.Dropout(<span class="fl">0.25</span>),</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    layers.Flatten(), <span class="co"># make it 1D</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">'relu'</span>), <span class="co"># 64 neurons</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    layers.Dropout(<span class="fl">0.25</span>), <span class="co"># to combat overfitting</span></span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">2</span>)</span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -459,13 +464,14 @@ Number of 'dog' images (label 1): 4669</code></pre>
 </div>
 </div>
 <div id="cell-25" class="cell" data-outputid="1bcf45fd-e8ac-4f5e-957a-805a12e47599" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model1.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model1.fit(train_ds,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                     epochs<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                     validation_data<span class="op">=</span>validation_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compile model</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>model1.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># train model</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model1.fit(train_ds,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                     epochs<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                     validation_data<span class="op">=</span>validation_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/20
 146/146 ━━━━━━━━━━━━━━━━━━━━ 9s 47ms/step - accuracy: 0.5024 - loss: 4.7313 - val_accuracy: 0.5589 - val_loss: 0.6745
@@ -597,10 +603,10 @@ Epoch 20/20
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    layers.Conv2D(<span class="dv">32</span>, (<span class="dv">3</span>,<span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>),</span>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    layers.MaxPooling2D((<span class="dv">3</span>,<span class="dv">3</span>)),</span>
 <span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    layers.Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>,<span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    layers.Flatten(),</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    layers.Dropout(<span class="fl">0.25</span>),</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">2</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    layers.Flatten(), <span class="co"># flatten into 1D </span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">'relu'</span>), <span class="co"># 64 neurons</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    layers.Dropout(<span class="fl">0.25</span>), <span class="co"># to help prevent overfitting</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">2</span>) <span class="co"># binary classification</span></span>
 <span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-33" class="cell" data-outputid="0c2559fb-6d85-48a4-e4f6-861ef161a08d" data-execution_count="22">
@@ -655,13 +661,14 @@ Epoch 20/20
 </div>
 </div>
 <div id="cell-34" class="cell" data-outputid="842e36b4-095d-4644-cd05-f2d3beb20dd3" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>model2.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model2.fit(train_ds,</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                     epochs<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                     validation_data<span class="op">=</span>validation_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compile model</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>model2.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># train model </span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model2.fit(train_ds,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                     epochs<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                     validation_data<span class="op">=</span>validation_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/20
 146/146 ━━━━━━━━━━━━━━━━━━━━ 45s 292ms/step - accuracy: 0.5200 - loss: 1.7734 - val_accuracy: 0.5451 - val_loss: 0.6885
@@ -706,10 +713,11 @@ Epoch 20/20
 </div>
 </div>
 <div id="cell-35" class="cell" data-outputid="727e0a3d-08c2-4517-b4a5-c2b3fd9e7d6b" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"accuracy"</span>], label <span class="op">=</span> <span class="st">"training"</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"val_accuracy"</span>], label <span class="op">=</span> <span class="st">"validation"</span>)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"epoch"</span>, ylabel <span class="op">=</span> <span class="st">"accuracy"</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot accuracy metrics</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"accuracy"</span>], label <span class="op">=</span> <span class="st">"training"</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"val_accuracy"</span>], label <span class="op">=</span> <span class="st">"validation"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"epoch"</span>, ylabel <span class="op">=</span> <span class="st">"accuracy"</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -744,10 +752,10 @@ Epoch 20/20
 <span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    layers.Conv2D(<span class="dv">32</span>, (<span class="dv">3</span>,<span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>),</span>
 <span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    layers.MaxPooling2D((<span class="dv">3</span>,<span class="dv">3</span>)),</span>
 <span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    layers.Conv2D(<span class="dv">64</span>, (<span class="dv">3</span>,<span class="dv">3</span>), activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    layers.Flatten(),</span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    layers.Dropout(<span class="fl">0.25</span>),</span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">2</span>)</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    layers.Flatten(), <span class="co"># to convert into 1D </span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">64</span>, activation<span class="op">=</span><span class="st">'relu'</span>), <span class="co"># 64 neutrons</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    layers.Dropout(<span class="fl">0.25</span>), <span class="co"># to help prevent overfitting</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">2</span>) <span class="co"># binary classification</span></span>
 <span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-39" class="cell" data-outputid="87a56258-b0ec-40d4-aad1-4cef0a7b5de4" data-execution_count="50">
@@ -804,13 +812,14 @@ Epoch 20/20
 </div>
 </div>
 <div id="cell-40" class="cell" data-outputid="8f5a891e-d1b1-4995-9731-3c83b02e0805" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>model3.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model3.fit(train_ds,</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                     epochs<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                     validation_data<span class="op">=</span>validation_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compile model</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>model3.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># train model</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model3.fit(train_ds,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                     epochs<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>                     validation_data<span class="op">=</span>validation_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/20
 146/146 ━━━━━━━━━━━━━━━━━━━━ 48s 309ms/step - accuracy: 0.5414 - loss: 0.6860 - val_accuracy: 0.6642 - val_loss: 0.6114
@@ -855,10 +864,11 @@ Epoch 20/20
 </div>
 </div>
 <div id="cell-41" class="cell" data-outputid="295a8ea3-872b-4c2a-a220-cd85fc6edce8" data-execution_count="54">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"accuracy"</span>], label <span class="op">=</span> <span class="st">"training"</span>)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"val_accuracy"</span>], label <span class="op">=</span> <span class="st">"validation"</span>)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"epoch"</span>, ylabel <span class="op">=</span> <span class="st">"accuracy"</span>)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot accuracy metrics</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"accuracy"</span>], label <span class="op">=</span> <span class="st">"training"</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"val_accuracy"</span>], label <span class="op">=</span> <span class="st">"validation"</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"epoch"</span>, ylabel <span class="op">=</span> <span class="st">"accuracy"</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -879,22 +889,23 @@ Epoch 20/20
 <p>To make this work, we’d start by selecting a <code>base model</code> that’s been pre-trained. We’d then integrate this base model into a new model tailored to our specific need — distinguishing cats from dogs. The final step would be to train this newly created model on our task.</p>
 <div id="cell-44" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>IMG_SHAPE <span class="op">=</span> (<span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">3</span>)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>base_model <span class="op">=</span> keras.applications.MobileNetV3Large(input_shape<span class="op">=</span>IMG_SHAPE,</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                                               include_top<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                                               weights<span class="op">=</span><span class="st">'imagenet'</span>)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>base_model.trainable <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> keras.Input(shape<span class="op">=</span>IMG_SHAPE)</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> base_model(i, training <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>base_model_layer <span class="op">=</span> keras.Model(inputs <span class="op">=</span> i, outputs <span class="op">=</span> x)</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>model4 <span class="op">=</span> models.Sequential([</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    layers.RandomFlip(),</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    layers.RandomRotation(factor<span class="op">=</span><span class="fl">0.2</span>),</span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>    base_model_layer,</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    layers.Flatten(),</span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">2</span>)</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use the pre-trained `base model` </span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>base_model <span class="op">=</span> keras.applications.MobileNetV3Large(input_shape<span class="op">=</span>IMG_SHAPE,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                                               include_top<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                                               weights<span class="op">=</span><span class="st">'imagenet'</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>base_model.trainable <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> keras.Input(shape<span class="op">=</span>IMG_SHAPE)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> base_model(i, training <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>base_model_layer <span class="op">=</span> keras.Model(inputs <span class="op">=</span> i, outputs <span class="op">=</span> x)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>model4 <span class="op">=</span> models.Sequential([</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    layers.RandomFlip(), <span class="co"># random flip layer</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>    layers.RandomRotation(factor<span class="op">=</span><span class="fl">0.2</span>),<span class="co"># random rotation layer</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    base_model_layer, <span class="co"># add in the `base model` as a layer</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    layers.Flatten(), <span class="co"># flatten into 1D</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    layers.Dense(<span class="dv">2</span>) <span class="co"># binary classification</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-45" class="cell" data-outputid="8ccc3ec6-fc54-485f-d410-913a499d69fa" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model4.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -932,13 +943,14 @@ Epoch 20/20
 </div>
 </div>
 <div id="cell-46" class="cell" data-outputid="15f378a9-5035-445c-dc04-13e09b9119f8" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>model4.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model4.fit(train_ds,</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                     epochs<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>                     validation_data<span class="op">=</span>validation_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compile model</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>model4.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>              loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># train model</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model4.fit(train_ds,</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>                     epochs<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>                     validation_data<span class="op">=</span>validation_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/20
 146/146 ━━━━━━━━━━━━━━━━━━━━ 59s 407ms/step - accuracy: 0.8458 - loss: 0.9495 - val_accuracy: 0.9256 - val_loss: 0.6401
@@ -983,10 +995,11 @@ Epoch 20/20
 </div>
 </div>
 <div id="cell-47" class="cell" data-outputid="7db1a34c-6453-4c43-a126-486905fb3d44" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"accuracy"</span>], label <span class="op">=</span> <span class="st">"training"</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"val_accuracy"</span>], label <span class="op">=</span> <span class="st">"validation"</span>)</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"epoch"</span>, ylabel <span class="op">=</span> <span class="st">"accuracy"</span>)</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot accuracy metrics</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"accuracy"</span>], label <span class="op">=</span> <span class="st">"training"</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"val_accuracy"</span>], label <span class="op">=</span> <span class="st">"validation"</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>plt.gca().<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"epoch"</span>, ylabel <span class="op">=</span> <span class="st">"accuracy"</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
