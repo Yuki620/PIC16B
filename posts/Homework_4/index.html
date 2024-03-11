@@ -167,7 +167,7 @@ window.Quarto = {
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/chi-yuki-yu-ab64171a8/"> <i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/yuki-yu-ab64171a8/"> <i class="bi bi-linkedin" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -243,12 +243,12 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="boundary-conditions">Boundary Conditions:</h4>
 <p><span class="math display">\[u^k_{-1,j} = u^k_{N,j} \quad u^k_{i,-1} = u^k_{i,N} = 0
 \]</span></p>
-<div id="cell-2" class="cell">
+<div id="cell-2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">0.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and we will use a similar initial condition as in the 1D case: putting 1 unit of heat at the midpoint.</p>
-<div id="cell-4" class="cell" data-outputid="3431956b-6f1f-40e0-86ca-109a63b40d29">
+<div id="cell-4" class="cell" data-outputid="3431956b-6f1f-40e0-86ca-109a63b40d29" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># construct initial condition: 1 unit of heat at midpoint.</span></span>
@@ -267,7 +267,7 @@ window.Quarto = {
 <section id="with-matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="with-matrix-multiplication">1. With Matrix Multiplication</h3>
 <p>As in the linear algebra lecture, let’s use matrix-vector multiplication to simulate the heat diffusion in the 2D space. The vector here is created by <code>flattening</code> the current solution . Each iteration of the update is given by: #### <code>advance_time_matvecmul</code></p>
-<div id="cell-6" class="cell" data-outputid="3c0ce008-9550-49f6-e297-39ddce700a2d" data-execution_count="5">
+<div id="cell-6" class="cell" data-outputid="3c0ce008-9550-49f6-e297-39ddce700a2d" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> heat_equation <span class="im">import</span> advance_time_matvecmul</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> inspect</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(advance_time_matvecmul))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -295,14 +295,14 @@ window.Quarto = {
 <li><p>The diagonals immediately above and below the main diagonal (with entries of 1) represent the left and right neighbors in the grid, respectively.</p></li>
 <li><p>The diagonals N steps away from the main diagonal (also with entries of 1) represent the top and bottom neighbors in the grid.</p></li>
 </ul>
-<div id="cell-8" class="cell" data-outputid="ec5e5c03-8ab1-47e3-fa41-5d8cb1019bdd">
+<div id="cell-8" class="cell" data-outputid="ec5e5c03-8ab1-47e3-fa41-5d8cb1019bdd" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> N <span class="op">*</span> N</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>diagonals <span class="op">=</span> [<span class="op">-</span><span class="dv">4</span> <span class="op">*</span> np.ones(n), np.ones(n<span class="op">-</span><span class="dv">1</span>), np.ones(n<span class="op">-</span><span class="dv">1</span>), np.ones(n<span class="op">-</span>N), np.ones(n<span class="op">-</span>N)]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>diagonals[<span class="dv">1</span>][(N<span class="op">-</span><span class="dv">1</span>)::N] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>diagonals[<span class="dv">2</span>][(N<span class="op">-</span><span class="dv">1</span>)::N] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.diag(diagonals[<span class="dv">0</span>]) <span class="op">+</span> np.diag(diagonals[<span class="dv">1</span>], <span class="dv">1</span>) <span class="op">+</span> np.diag(diagonals[<span class="dv">2</span>], <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> np.diag(diagonals[<span class="dv">3</span>], N) <span class="op">+</span> np.diag(diagonals[<span class="dv">4</span>], <span class="op">-</span>N)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>array([[-4.,  1.,  0., ...,  0.,  0.,  0.],
        [ 1., -4.,  1., ...,  0.,  0.,  0.],
        [ 0.,  1., -4., ...,  0.,  0.,  0.],
@@ -315,7 +315,7 @@ window.Quarto = {
 </section>
 <section id="get_a" class="level4">
 <h4 class="anchored" data-anchor-id="get_a"><code>get_A</code></h4>
-<div id="cell-10" class="cell" data-outputid="5db3afec-c83b-49f9-9d54-7ed709c7a3fb" data-execution_count="6">
+<div id="cell-10" class="cell" data-outputid="5db3afec-c83b-49f9-9d54-7ed709c7a3fb" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> heat_equation <span class="im">import</span> get_A</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inspect.getsource(get_A))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -342,7 +342,7 @@ window.Quarto = {
 </code></pre>
 </div>
 </div>
-<div id="cell-11" class="cell" data-scrolled="true" data-outputid="f2d707a3-96f3-4b91-ef29-68eaf53ac4f6">
+<div id="cell-11" class="cell" data-outputid="f2d707a3-96f3-4b91-ef29-68eaf53ac4f6" data-scrolled="true">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">0.2</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.random.rand(N, N)  <span class="co"># Initial state (random temperature distribution)</span></span>
@@ -412,7 +412,7 @@ window.Quarto = {
 </section>
 <section id="sparse-matrix-in-jax" class="level3">
 <h3 class="anchored" data-anchor-id="sparse-matrix-in-jax">2. Sparse Matrix in JAX</h3>
-<div id="cell-14" class="cell" data-scrolled="true" data-outputid="4e259842-5da4-414a-e516-2b347d7702e2">
+<div id="cell-14" class="cell" data-outputid="4e259842-5da4-414a-e516-2b347d7702e2" data-scrolled="true">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax.experimental <span class="im">import</span> sparse</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> grad, jit</span>
@@ -669,7 +669,7 @@ def advance_time_jax(u, epsilon):
 </code></pre>
 </div>
 </div>
-<div id="cell-24" class="cell" data-scrolled="false" data-outputid="b2b41716-0ead-433e-f2c6-e89ed91468b3">
+<div id="cell-24" class="cell" data-outputid="b2b41716-0ead-433e-f2c6-e89ed91468b3" data-scrolled="false">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">0.2</span></span>
