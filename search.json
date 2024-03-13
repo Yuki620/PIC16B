@@ -2,65 +2,44 @@
   {
     "objectID": "posts.html",
     "href": "posts.html",
-    "title": "Yuki Yu’s Portfolio",
+    "title": "Yuki Yu's Portfolio",
     "section": "",
-    "text": "Fake News Classification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classification: Cats or Dogs?\n\n\n\n\n\n\nWeek 8\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 29, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nHeat Diffusion\n\n\n\n\n\n\nWeek 7\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 20, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nSimple Message Web App\n\n\n\n\n\n\nWeek 5\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 5, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nWeb Scraping TMDB - ‘Wonka’\n\n\n\n\n\n\nWeek 3\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 28, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nGlobal Climate Over Time: Temperature Trends by Country\n\n\n\n\n\n\nWeek 1\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nHW 0\n\n\n\n\n\n\nWeek 0\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nYuki Yu\n\n\n\n\n\n\nNo matching items"
+    "text": "Fake News Classification\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classification: Cats or Dogs?\n\n\n\n\n\n\nWeek 8\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 29, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nHeat Diffusion\n\n\n\n\n\n\nWeek 7\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 20, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nSimple Message Web App\n\n\n\n\n\n\nWeek 5\n\n\nHomework\n\n\n\n\n\n\n\n\n\nFeb 5, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nWeb Scraping TMDB - ‘Wonka’\n\n\n\n\n\n\nWeek 3\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 28, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nGlobal Climate Over Time: Temperature Trends by Country\n\n\n\n\n\n\nWeek 1\n\n\nHomework\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nYuki Yu\n\n\n\n\n\n\n\n\n\n\n\n\nHW 0\n\n\n\n\n\n\nData\n\n\nPython\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nYuki Yu\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "experiences.html",
     "href": "experiences.html",
     "title": "Work and Experience",
     "section": "",
-    "text": "Honors/Awards: The Big Bang Theory Scholarship\nRelevant Coursework: Data Analysis & Regression, Design & Analysis of Experiment, Probability, Mathematical Statistics, Python, C++ Optimization, Monte Carlo Methods, Statistical Consulting, Statistical Models & Data Mining, Stochastic Processes, Game Theory, Accounting"
-  },
-  {
-    "objectID": "experiences.html#b.s.-mathematicsapplied-and-b.s.-statistics-ds",
-    "href": "experiences.html#b.s.-mathematicsapplied-and-b.s.-statistics-ds",
-    "title": "Work and Experience",
-    "section": "",
-    "text": "Honors/Awards: The Big Bang Theory Scholarship\nRelevant Coursework: Data Analysis & Regression, Design & Analysis of Experiment, Probability, Mathematical Statistics, Python, C++ Optimization, Monte Carlo Methods, Statistical Consulting, Statistical Models & Data Mining, Stochastic Processes, Game Theory, Accounting"
+    "text": "Python, R, SQL, SAS, C++, MATLAB, Java, Tableau, Microsoft Suite (Word, PowerPoint, Excel)\n\n\n\nEnglish (native), Mandarin Chinese (native), Japanese (Advanced)"
   },
   {
     "objectID": "experiences.html#technical",
     "href": "experiences.html#technical",
     "title": "Work and Experience",
-    "section": "Technical",
-    "text": "Technical\nPython, R, SQL, SAS, C++, MATLAB, Java, Tableau, Microsoft Suite (Word, PowerPoint, Excel)"
+    "section": "",
+    "text": "Python, R, SQL, SAS, C++, MATLAB, Java, Tableau, Microsoft Suite (Word, PowerPoint, Excel)"
   },
   {
     "objectID": "experiences.html#languages",
     "href": "experiences.html#languages",
     "title": "Work and Experience",
-    "section": "Languages",
-    "text": "Languages\nEnglish (native), Mandarin Chinese (native), Japanese (Advanced)"
+    "section": "",
+    "text": "English (native), Mandarin Chinese (native), Japanese (Advanced)"
   },
   {
-    "objectID": "experiences.html#academia-sinica",
-    "href": "experiences.html#academia-sinica",
+    "objectID": "experiences.html#academia-sinica---research-intern",
+    "href": "experiences.html#academia-sinica---research-intern",
     "title": "Work and Experience",
-    "section": "Academia Sinica",
-    "text": "Academia Sinica"
+    "section": "Academia Sinica - Research Intern",
+    "text": "Academia Sinica - Research Intern\n\nChecked the validity of a mathematical model of biofilm oscillations presented in a research paper and modified it\nWrote new ODE models and solved them in Python using RK4 and ran simulations in NetLogo to see how the models would behave as individual-based models"
   },
   {
-    "objectID": "experiences.html#research-intern",
-    "href": "experiences.html#research-intern",
+    "objectID": "experiences.html#mechanics-bank-auto-finance---auto-risk-analyst",
+    "href": "experiences.html#mechanics-bank-auto-finance---auto-risk-analyst",
     "title": "Work and Experience",
-    "section": "Research Intern",
-    "text": "Research Intern\n\nChecked the validity of a mathematical model of biofilm oscillations presented in a research paper and modified it\nWrote new ODE models and solved them in Python using RK4 and ran simulations in NetLogo to see how the models would behave as individual-based models"
-  },
-  {
-    "objectID": "experiences.html#mechanics-bank-auto-finance",
-    "href": "experiences.html#mechanics-bank-auto-finance",
-    "title": "Work and Experience",
-    "section": "Mechanics Bank Auto Finance",
-    "text": "Mechanics Bank Auto Finance"
-  },
-  {
-    "objectID": "experiences.html#auto-risk-analyst",
-    "href": "experiences.html#auto-risk-analyst",
-    "title": "Work and Experience",
-    "section": "Auto Risk Analyst",
-    "text": "Auto Risk Analyst\n\nWorked in the originations scorecard development team to build a higher accuracy scorecard to minimize the overallocation of resources for risk. This would have freed up resources that could be used towards the current expansion of the bank.\nPulled, cleaned, and prepared the data to build the development database for a new custom originations scorecard using SAS, SQL, and Excel\nBuilt a preliminary logistic inference model for the scorecard with SQL and SAS\nBuilt a finalized version of an inference model that will generate loss predictions with more accuracy Mechanics Bank Auto Finance"
+    "section": "Mechanics Bank Auto Finance - Auto Risk Analyst",
+    "text": "Mechanics Bank Auto Finance - Auto Risk Analyst\n\nWorked in the originations scorecard development team to build a higher accuracy scorecard to minimize the overallocation of resources for risk. This would have freed up resources that could be used towards the current expansion of the bank.\nPulled, cleaned, and prepared the data to build the development database for a new custom originations scorecard using SAS, SQL, and Excel\nBuilt a preliminary logistic inference model for the scorecard with SQL and SAS\nBuilt a finalized version of an inference model that will generate loss predictions with more accuracy Mechanics Bank Auto Finance"
   },
   {
     "objectID": "experiences.html#asa-datafest-at-ucla-2023-judges-choice-winner",
@@ -310,8 +289,8 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "About Me",
+    "title": "About",
     "section": "",
-    "text": "My name is Yuki Yu, and I am a student at the University of California, Los Angeles, pursuing a Bachelor of Science in Applied Mathematics and Statistics & DS. I have strong interest and background in data analysis and data science, especially in the financial sector."
+    "text": "My name is Yuki Yu, and I am a student at the University of California, Los Angeles, pursuing a Bachelor of Science in Applied Mathematics and Statistics & DS. I have strong interest and background in data analysis and data science, especially in the financial sector. Learn more about me through my Resume."
   }
 ]
