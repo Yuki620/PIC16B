@@ -162,8 +162,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="quarto-title column-page">
       <h1 class="title">Fake News Classification</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Week 9</div>
-                <div class="quarto-category">Homework</div>
+                <div class="quarto-category">ML</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -576,7 +576,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="validation-data" class="level3">
 <h3 class="anchored" data-anchor-id="validation-data">Validation Data</h3>
-<p>After you’ve constructed your primary <code>Dataset</code>, split of 20% of it to use for validation.</p>
+<p>After you’ve constructed your primary <code>Dataset</code>, split it into two parts, where 80% is used for training and 20% of it to use for validation.</p>
 <div id="cell-13" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct the primary Dataset</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Dataset <span class="op">=</span> make_dataset(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -639,6 +639,7 @@ This is the number of 'true' labels: 10709</code></pre>
 </section>
 <section id="textvectorization" class="level3">
 <h3 class="anchored" data-anchor-id="textvectorization">TextVectorization</h3>
+<p>Text vectorization is a process in natural language processing that turns text into numerical data so that machine learning models can process it. The <code>TextVectorization</code> layer in TensorFlow automates this by assigning a unique integer to each word and standardizing the text, like converting to lowercase and removing punctuation. This prepares the text for the model to learn from the patterns within.</p>
 <div id="cell-20" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#preparing a text vectorization layer for tf model</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>size_vocabulary <span class="op">=</span> <span class="dv">2000</span></span>
@@ -681,6 +682,7 @@ This is the number of 'true' labels: 10709</code></pre>
 <section id="first-model" class="level3">
 <h3 class="anchored" data-anchor-id="first-model">First Model</h3>
 <p>In the first model, we will use only the article title as an input.</p>
+<p>The code below sets up a neural network with <code>keras</code> to classify text by creating separate input layers for article titles and text content, vectorizing the titles, applying an embedding layer to capture semantic meaning, using dropout for regularization, and averaging the features. A dense layer then processes these features for binary classification of the text.</p>
 <div id="cell-22" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Create the title and text inputs</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -707,7 +709,8 @@ This is the number of 'true' labels: 10709</code></pre>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>title_output <span class="op">=</span> layers.Dense(<span class="dv">2</span>, name <span class="op">=</span> <span class="st">"fake"</span>)(title_features) <span class="co"># final binary classification</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-24" class="cell" data-outputid="6900066b-58cc-4513-cc49-0378ed7d75c0" data-execution_count="11">
+<p>Now we will put all the layers into one cohesive model and display the summary.</p>
+<div id="cell-25" class="cell" data-outputid="6900066b-58cc-4513-cc49-0378ed7d75c0" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># put everything into a model</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="op">=</span> keras.Model(</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>      inputs <span class="op">=</span> title_input,</span>
@@ -756,7 +759,8 @@ This is the number of 'true' labels: 10709</code></pre>
 </pre>
 </div>
 </div>
-<div id="cell-25" class="cell" data-outputid="96704ad2-b53e-4c7e-cf82-fcc02bbb824c">
+<p>Now we will visualize all the layers in our first model:</p>
+<div id="cell-27" class="cell" data-outputid="96704ad2-b53e-4c7e-cf82-fcc02bbb824c" data-scrolled="false">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize model</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>utils.plot_model(model1, <span class="st">"output1_filename.png"</span>,</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                       show_shapes<span class="op">=</span><span class="va">True</span>,</span>
@@ -769,7 +773,8 @@ This is the number of 'true' labels: 10709</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-26" class="cell" data-outputid="06fb9de8-3f00-4cba-e1bb-8d350114dacc">
+<p>Now we will compile the model and train it:</p>
+<div id="cell-29" class="cell" data-outputid="06fb9de8-3f00-4cba-e1bb-8d350114dacc">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compile the model</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>model1.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>,</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>              loss <span class="op">=</span> losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
@@ -822,7 +827,8 @@ Epoch 20/20
 </div>
 </div>
 <p><strong>The validation accuracy just based on title alone is around 87% to 88%.</strong> I added 2 <code>Dropout</code> layers to combat overfitting, and since the validation accuracy is slightly higher than the training accuracy, overfitting is definitely not an issue.</p>
-<div id="cell-28" class="cell" data-outputid="5f286442-6a1d-4826-c4f4-23c92d3c10d1">
+<p>Now we will plot the accuracy metrics:</p>
+<div id="cell-31" class="cell" data-outputid="5f286442-6a1d-4826-c4f4-23c92d3c10d1">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot accuracy metrics</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history1.history[<span class="st">"accuracy"</span>], label <span class="op">=</span> <span class="st">"training"</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plt.plot(history1.history[<span class="st">"val_accuracy"</span>], label <span class="op">=</span> <span class="st">"validation"</span>)</span>
@@ -841,7 +847,8 @@ Epoch 20/20
 <section id="second-model" class="level2">
 <h2 class="anchored" data-anchor-id="second-model">Second Model</h2>
 <p>In the second model, we will only use the article text as an input.</p>
-<div id="cell-30" class="cell" data-execution_count="12">
+<p>The code constructs a neural network model that processes text data for binary classification. It includes layers for text vectorization, embedding, dropout to mitigate overfitting, pooling to condense features, and dense layers for learning, culminating in a binary output.</p>
+<div id="cell-33" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use functional APIs</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>text_features <span class="op">=</span> vectorize_layer(text_input) <span class="co"># vectorize the text</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>text_features <span class="op">=</span> layers.Embedding(size_vocabulary, output_dim <span class="op">=</span> <span class="dv">3</span>, name<span class="op">=</span><span class="st">"embedding2"</span>)(text_features) <span class="co"># capture semantic meaning and relationship b/w words</span></span>
@@ -852,7 +859,8 @@ Epoch 20/20
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>text_output <span class="op">=</span> layers.Dense(<span class="dv">2</span>, name <span class="op">=</span> <span class="st">"fake"</span>)(text_features) <span class="co"># final binary classification</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-31" class="cell" data-outputid="0e8e030c-8f3b-4f09-c65b-c69d419a5a2b" data-execution_count="13">
+<p>Now we will put all the layers into one cohesive model and display the summary:</p>
+<div id="cell-35" class="cell" data-outputid="0e8e030c-8f3b-4f09-c65b-c69d419a5a2b" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># put everything into a model</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="op">=</span> keras.Model(</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>      inputs <span class="op">=</span> text_input,</span>
@@ -901,7 +909,7 @@ Epoch 20/20
 </pre>
 </div>
 </div>
-<div id="cell-32" class="cell" data-outputid="e09e3966-8067-4d51-d608-9a218401254c">
+<div id="cell-36" class="cell" data-outputid="e09e3966-8067-4d51-d608-9a218401254c">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize model</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>utils.plot_model(model2, <span class="st">"output2_filename.png"</span>,</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                       show_shapes<span class="op">=</span><span class="va">True</span>,</span>
@@ -914,7 +922,8 @@ Epoch 20/20
 </div>
 </div>
 </div>
-<div id="cell-33" class="cell" data-outputid="0f9745a3-291b-4071-cb74-06cbb2ac1f65">
+<p>Now we will compile the model and train it:</p>
+<div id="cell-38" class="cell" data-outputid="0f9745a3-291b-4071-cb74-06cbb2ac1f65">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compile the model</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>model2.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>              loss <span class="op">=</span> losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
@@ -967,7 +976,8 @@ Epoch 20/20
 </div>
 </div>
 <p><strong>The validation accuracy just based on text alone is above 96%.</strong> Once again, overfitting is not an issue.</p>
-<div id="cell-35" class="cell" data-outputid="ed8fac27-a924-4811-e8f7-1a1ee87649b3">
+<p>Now we will plot the accuracy metrics:</p>
+<div id="cell-40" class="cell" data-outputid="ed8fac27-a924-4811-e8f7-1a1ee87649b3">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot accuracy metrics</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history2.history[<span class="st">"accuracy"</span>], label <span class="op">=</span> <span class="st">"training"</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plt.plot(history2.history[<span class="st">"val_accuracy"</span>], label <span class="op">=</span> <span class="st">"validation"</span>)</span>
@@ -985,14 +995,16 @@ Epoch 20/20
 <section id="third-model" class="level2">
 <h2 class="anchored" data-anchor-id="third-model">Third Model</h2>
 <p>In the third model, We will use both the article title and the article text as input.</p>
-<div id="cell-37" class="cell" data-execution_count="14">
+<p>It combines the feature representations of the title and the text using concatenation, then processes this combined data through a dense layer with ReLU activation, and finally outputs the result through a binary classification layer.</p>
+<div id="cell-42" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># combine both text and title and will require us to concatenate our prior two pipelines:</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>both <span class="op">=</span> layers.concatenate([title_features, text_features], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># add another final dense layer</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>both <span class="op">=</span> layers.Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(both)</span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>both_output <span class="op">=</span> layers.Dense(<span class="dv">2</span>, name<span class="op">=</span><span class="st">"fake"</span>)(both)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-38" class="cell" data-outputid="b8153d93-b541-43e7-fc49-054ba36b8066" data-execution_count="15">
+<p>Now we will put all the layers into one cohesive model and display the summary:</p>
+<div id="cell-44" class="cell" data-outputid="b8153d93-b541-43e7-fc49-054ba36b8066" data-scrolled="true" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="op">=</span> keras.Model(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> [title_input, text_input],</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> both_output</span>
@@ -1057,7 +1069,8 @@ Epoch 20/20
 </pre>
 </div>
 </div>
-<div id="cell-39" class="cell" data-outputid="8269523d-5245-468b-cb4f-5a52c4396a77">
+<p>Now we will visualize the model:</p>
+<div id="cell-46" class="cell" data-outputid="8269523d-5245-468b-cb4f-5a52c4396a77" data-scrolled="true">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize model</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>utils.plot_model(model3, <span class="st">"output3_filename.png"</span>,</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                       show_shapes<span class="op">=</span><span class="va">True</span>,</span>
@@ -1070,7 +1083,8 @@ Epoch 20/20
 </div>
 </div>
 </div>
-<div id="cell-40" class="cell" data-outputid="a793aa31-569a-4a2f-91bd-190118862b9a">
+<p>Now we will compile the model and train it:</p>
+<div id="cell-48" class="cell" data-outputid="a793aa31-569a-4a2f-91bd-190118862b9a">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compile the model</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>model3.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">"adam"</span>,</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>              loss <span class="op">=</span> losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
@@ -1123,7 +1137,8 @@ Epoch 20/20
 </div>
 </div>
 <p><strong>The validation accuracy just based on both title and text is above 97%.</strong> Once again, overfitting is not an issue.</p>
-<div id="cell-42" class="cell" data-outputid="ad7a0fbc-5a53-4626-c913-bb05390c15a9">
+<p>Now we will plot the accuracy metrics:</p>
+<div id="cell-50" class="cell" data-outputid="ad7a0fbc-5a53-4626-c913-bb05390c15a9">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot accuracy metrics</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history2.history[<span class="st">"accuracy"</span>], label <span class="op">=</span> <span class="st">"training"</span>)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plt.plot(history2.history[<span class="st">"val_accuracy"</span>], label <span class="op">=</span> <span class="st">"validation"</span>)</span>
@@ -1141,7 +1156,8 @@ Epoch 20/20
 </section>
 <section id="model-evaluation" class="level2">
 <h2 class="anchored" data-anchor-id="model-evaluation">4. Model Evaluation</h2>
-<div id="cell-44" class="cell" data-outputid="d2c1a961-0bd8-4767-88bc-2ad3081664d3" data-execution_count="16">
+<p>To evaluate our model against our test data, we will donwload it from the link below.</p>
+<div id="cell-52" class="cell" data-outputid="d2c1a961-0bd8-4767-88bc-2ad3081664d3" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download test data</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>test_url <span class="op">=</span> <span class="st">"https://github.com/PhilChodrow/PIC16b/blob/master/datasets/fake_news_test.csv?raw=true"</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>test_df <span class="op">=</span> pd.read_csv(test_url)</span>
@@ -1450,11 +1466,13 @@ Epoch 20/20
   </div>
 </div>
 </div>
-<div id="cell-45" class="cell">
+<p>We then need to preprocess our test data.</p>
+<div id="cell-54" class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># preprocess the test data</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>test_ds <span class="op">=</span> make_dataset(test_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-46" class="cell" data-outputid="6dab94f0-b0cb-4ee3-b6cf-9e305d92190a">
+<p>After preprocessing, we can now evaulate it!</p>
+<div id="cell-56" class="cell" data-outputid="6dab94f0-b0cb-4ee3-b6cf-9e305d92190a">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test it</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>model3.evaluate(test_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1468,7 +1486,8 @@ Epoch 20/20
 </section>
 <section id="embedding-visualizations" class="level2">
 <h2 class="anchored" data-anchor-id="embedding-visualizations">4. Embedding Visualizations</h2>
-<div id="cell-49" class="cell" data-execution_count="17">
+<p>The code retrieves the learned weights from two embedding layers corresponding to title and text. To facilitate visualization, it uses Principal Component Analysis (PCA) from the sklearn library to reduce the dimensionality of these weights to two components. This reduction allows for plotting in a two-dimensional space, which can help in understanding and interpreting the relationships and clustering of words based on their learned embeddings.</p>
+<div id="cell-59" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the weights from the first embedding layer (for the title)</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>weights_1 <span class="op">=</span> model3.get_layer(<span class="st">'embedding1'</span>).get_weights()[<span class="dv">0</span>]</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1478,7 +1497,7 @@ Epoch 20/20
 <span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the shared vocabulary from the vectorization layer</span></span>
 <span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>vocab <span class="op">=</span> vectorize_layer.get_vocabulary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-50" class="cell" data-execution_count="18">
+<div id="cell-60" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the weights from both embedding layers if necessary</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform PCA to reduce to 2 components</span></span>
@@ -1488,7 +1507,8 @@ Epoch 20/20
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>pca_2 <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>weights_2 <span class="op">=</span> pca_2.fit_transform(weights_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-51" class="cell" data-execution_count="19">
+<p>The code below demonstrates how to create two pandas DataFrames to visualize the embeddings from two different layers. For both the title and text embeddings (embedding1 and embedding2), it captures each word in the vocabulary and their corresponding embedding coordinates (x0, x1). These DataFrames are then concatenated to form a single DataFrame that can be used for further analysis or visualization, such as plotting the embeddings in a 2D space to observe the relationship between different words.</p>
+<div id="cell-62" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a dataframe from our results</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>embedding1_df <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'word'</span> : vocab,</span>
@@ -1505,7 +1525,8 @@ Epoch 20/20
 <span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the dataframes for title and text</span></span>
 <span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>embedding_df <span class="op">=</span> pd.concat([embedding1_df, embedding2_df])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-52" class="cell" data-outputid="c0d27835-aed4-4c7d-e0a7-aad926754613">
+<p>We can plot the embedding now:</p>
+<div id="cell-64" class="cell" data-outputid="c0d27835-aed4-4c7d-e0a7-aad926754613">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the embedding</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(embedding_df,</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                 x <span class="op">=</span> <span class="st">"x0"</span>,</span>
@@ -1516,7 +1537,7 @@ Epoch 20/20
 <span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>fig.write_html(<span class="st">'embedding.html'</span>) <span class="co"># write it to html so we can show it even after downloading from colab</span></span>
 <span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-53" class="cell" data-tags="[&quot;hide_input&quot;]" data-execution_count="1">
+<div id="cell-65" class="cell" data-tags="[&quot;hide_input&quot;]" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the html we produced from the above cell </span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>IFrame(src<span class="op">=</span><span class="st">'embedding.html'</span>, width<span class="op">=</span><span class="dv">650</span>, height<span class="op">=</span><span class="dv">385</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
