@@ -2,50 +2,68 @@
 title: "Work and Experience"
 format: html
 ---
-# Skills
 
-## Technical
+## 🎓 Education
 
- Python, R, SQL, SAS, C++, MATLAB, Java, Tableau, Microsoft Suite (Word, PowerPoint, Excel)
+### **Massachusetts Institute of Technology (MIT)** 
 
-## Languages
+**Master of Business Analytics | 2024–2025**
 
- English (native), Mandarin Chinese (native), Japanese (Advanced)
+- Coursework: Machine Learning, Optimization Methods, Analytics Edge
+- Projects:
+  - ML Project: Classification modeling and designing recommendation systems for health news tweets (Python)
+  - Optimization Project: Optimizing EV charging station placements & charger allocations in Boston (Python, Julia)
 
-# Work and Experience
+### **University of California, Los Angeles (UCLA)**  
 
-## Academia Sinica - Research Intern
+**Bachelor of Science | Applied Mathematics and Statistics & Data Science | 2020–2024**
 
-- Checked the validity of a mathematical model of biofilm oscillations presented in a research paper and modified it
-- Wrote new ODE models and solved them in Python using RK4 and ran simulations in NetLogo to see how the models would
-behave as individual-based models
+---
 
-## Mechanics Bank Auto Finance - Auto Risk Analyst
+## 💻 Experience
 
-- Worked in the originations scorecard development team to build a higher accuracy scorecard to minimize the overallocation of resources for risk. This would have freed up resources that could be used towards the current expansion of the bank.
-- Pulled, cleaned, and prepared the data to build the development database for a new custom originations scorecard using SAS, SQL, and Excel
-- Built a preliminary logistic inference model for the scorecard with SQL and SAS
-- Built a finalized version of an inference model that will generate loss predictions with more accuracy Mechanics Bank Auto
-Finance
+### **MIT Sloan / Comcast | Data Scientist, Capstone Team Member**  
+_Spring 2025 – Present_
 
-# Honors & Awards 
-## ASA DataFest at UCLA 2023 – Judge’s Choice Winner
-- 48-hour data analytics hackathon with almost undergraduates and 80 teams. This year’s data was on ABA's Pro Bono Service which provides free legal counseling. Our team won the Judge's Choice Award for humanizing the data.
-- Our team focused on the responsiveness of this service and its client retention rate with added insight from sentiment analysis.
-- Used R, Python, and Tableau to analyze and visualize the data.
+- Leveraging Natural Language Processing (NLP), Large Language Models (LLMs) to analyze real-time customer interactions in calls and optimize engagement strategies
+- Implementing Retrieval-Augmented Generation (RAG) to identify customer issues in live calls and automate solution recommendations to improve customer satisfaction and reduce agent workload (Python, PySpark)
 
-# Relevant Projects
+### **MIT Sloan / CMA CGM | Data Scientist, Analytics Lab Team Member**  
+_Fall 2024_
 
-## IMDB Reviews Sentiment Analysis
+- Forecasted U.S. import trends across 6 regions and 4 products using machine learning algorithms ARIMA, SARIMAX, XGBoost, and Random Forest, improving operational efficiency and strategic planning (Python, R)
+- Created data-driven reports and presented insights to non-technical supervisors, ensuring data accessibility and informed decision-making
 
-- Used Python to do NLP and conduct sentiment analysis on the movie reviews left on the IMDB website
-- Examined various machine learning algorithms such as logistic regression, logistic regression with SGD, KNN, Random Forest, and Decision Trees under both BoW and TF-IDF
+### **Academia Sinica | Research Intern**  
+_Summer 2023_
 
-## Amazon Price Tracking Bot
+- Refined a mathematical model of biofilm oscillations, using ODE modeling and RK4 solvers to enhance predictions of microbial behavior relevant to infection control (Python)
+- Simulated the dynamics and behavior of individual-based biofilm models, providing insights into microbial interactions and biofilm development under varying conditions (NetLogo)
 
-- Used Python to create a bot that checks the price of a product at 8:00 a.m. every Monday, Wednesday, Friday, and Saturday.
-- If the price drops below our target price, then the bot sends an email to notify the user of the price drop.
-- Used BeautifulSoup for web scraping, the SMTP module to send the emails, and crontab to keep the script active.
+### **Mechanics Bank Auto Finance | Auto Risk Analyst (Part-Time)**  
+_2022–2023_
 
+- Developed an originations scorecard in a two-person team, completing most of the model building under mentor guidance to reduce overallocation risks and optimize resources for bank expansion
+- Processed large-scale transactional data to create a development database for the scorecard (SAS, SQL, Excel)
+- Built a logistic regression inference model to identify key predictors for risk assessment, optimizing resource allocation and improve decision-making (SQL, SAS)
+
+---
+
+## 🔧 Technical Skills
+
+- **Languages:** Python, R, SQL, PySpark, Julia, SAS, C++
+- **Tools:** Tableau, Databricks, Git, Excel
+- **Methods:** Machine Learning, Optimization, Statistical Testing, Time Series Forecasting
+
+---
+
+## 📅 Additional Information
+
+- Fluent in English and Chinese, Advanced in Japanese
+- Avid runner and amateur baker 🌾✨
+
+---
+
+[Download Resume (PDF)](Resume.pdf)
 
 
