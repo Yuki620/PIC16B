@@ -106,6 +106,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -130,6 +159,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../posts.html"> 
@@ -2337,6 +2370,7 @@ New proportion of non-delayed flights:  0.5</code></pre>
 <section id="conclusions" class="level2">
 <h2 class="anchored" data-anchor-id="conclusions">6. Conclusions</h2>
 <p>In conclusion, we created a Flask web app that helps users predict whether or not their flight will be delayed. Our project aims to predict flight delays, offering substantial benefits to travelers and airports by providing more accurate departure times and enhancing planning efficiency. However, it faces challenges such as data quality and availability, computational limitations, and the complexity of developing predictive models. Mitigating these risks requires thorough data assessment, scalable processing solutions, and flexible project scope management. Ethically, while the project presents an opportunity to improve the travel experience for passengers and operational efficiency for airports, it may also highlight airlines’ operational shortcomings, potentially impacting their reputation. Despite these considerations, the project stands to make a positive impact by enabling better-informed travel decisions and streamlining airport traffic management, contributing to a more predictable and less stressful travel experience for all involved. As far as any ethical concerns, there are very few that we have been able to identify. The only such concern may be that the airlines would not be happy with their constant delays being exposed.</p>
+
 
 
 </section>

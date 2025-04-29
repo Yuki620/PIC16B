@@ -1,0 +1,32 @@
+---
+title: "EV Charging Stations & Charger Allocation Optimization in Boston"
+author: "Yuki Yu"
+date: "2025-04-29"
+categories: [Optimization]
+format: html
+---
+
+### Project Summary
+
+This project develops an optimization model to identify optimal placement and sizing of Level 2 EV chargers in Boston neighborhoods to meet 2050 demand projections. Our objective is to balance accessibility, cost, and efficiency under budget constraints using a mixed-integer linear programming (MILP) formulation.
+
+- Built a cost-minimizing location allocation model using Boston census data, ChargePoint pricing, and AFDC station records
+- Simulated housing unit locations and projected demand across neighborhoods based on adoption scenarios from the Boston Zero Emission Roadmap
+- Focused initial scaling and model validation on Dorchester, Boston’s largest and most diverse neighborhood
+- Achieved 100% residential coverage with 213 chargers across 27 optimized stations, using only 68% of the available budget
+- Outperformed heuristic methods (e.g., hub-based siting at parks and schools) in terms of coverage and cost-efficiency
+
+---
+
+### Objective Function
+Minimize total cost of station and charger installation:
+
+$$
+\min_{x, y, u, x', u'} \sum_{j \in F_k} \sum_{k \in N} (c x_{jk} + g u_{jk}) + \sum_{j \in F'_k} \sum_{k \in N} (c x'_{jk} + g u'_{jk})
+$$
+
+### Final Deliverables
+For the full formulation and the step-by-step process, please see the full report!
+
+- [Download full report (PDF)](Report.pdf)  
+- [Download slides](Slides.pdf)

@@ -1,0 +1,22 @@
+---
+title: "Health Tweet Classification & Recommendation System"
+author: "Yuki Yu"
+date: "2025-04-28"
+categories: [Machine Learning, NLP, Recommendation]
+format: html
+---
+
+### Project Summary
+
+Built a multi-class classifier and a tweet recommendation system using a health-related tweet dataset from the UCI ML Repository.
+
+- Implemented labeling using zero-shot + keyword classification
+- Used BERT embeddings and SMOTE to address class imbalance
+- Built classification models: XGBoost, OCTs, Random Forest, Neural Network (Neural Network performed best with 57.5% accuracy)
+- Designed a recommendation system based on category filtering and cosine similarity
+- Used TF-IDF and GloVe for embedding evaluation
+
+### Final Deliverables
+
+- [Download full report (PDF)](Report.pdf)  
+- [Download slides](Slides.pdf)

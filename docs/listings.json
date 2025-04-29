@@ -9,5 +9,12 @@
       "/posts/Homework1/index.html",
       "/posts/Homework0/index.html"
     ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/ev-optimization/index.html",
+      "/projects/health-tweets/index.html"
+    ]
   }
 ]
