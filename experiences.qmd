@@ -1,0 +1,51 @@
+---
+title: "Work and Experience"
+format: html
+---
+# Skills
+
+## Technical
+
+ Python, R, SQL, SAS, C++, MATLAB, Java, Tableau, Microsoft Suite (Word, PowerPoint, Excel)
+
+## Languages
+
+ English (native), Mandarin Chinese (native), Japanese (Advanced)
+
+# Work and Experience
+
+## Academia Sinica - Research Intern
+
+- Checked the validity of a mathematical model of biofilm oscillations presented in a research paper and modified it
+- Wrote new ODE models and solved them in Python using RK4 and ran simulations in NetLogo to see how the models would
+behave as individual-based models
+
+## Mechanics Bank Auto Finance - Auto Risk Analyst
+
+- Worked in the originations scorecard development team to build a higher accuracy scorecard to minimize the overallocation of resources for risk. This would have freed up resources that could be used towards the current expansion of the bank.
+- Pulled, cleaned, and prepared the data to build the development database for a new custom originations scorecard using SAS, SQL, and Excel
+- Built a preliminary logistic inference model for the scorecard with SQL and SAS
+- Built a finalized version of an inference model that will generate loss predictions with more accuracy Mechanics Bank Auto
+Finance
+
+# Honors & Awards 
+## ASA DataFest at UCLA 2023 – Judge’s Choice Winner
+- 48-hour data analytics hackathon with almost undergraduates and 80 teams. This year’s data was on ABA's Pro Bono Service which provides free legal counseling. Our team won the Judge's Choice Award for humanizing the data.
+- Our team focused on the responsiveness of this service and its client retention rate with added insight from sentiment analysis.
+- Used R, Python, and Tableau to analyze and visualize the data.
+
+# Relevant Projects
+
+## IMDB Reviews Sentiment Analysis
+
+- Used Python to do NLP and conduct sentiment analysis on the movie reviews left on the IMDB website
+- Examined various machine learning algorithms such as logistic regression, logistic regression with SGD, KNN, Random Forest, and Decision Trees under both BoW and TF-IDF
+
+## Amazon Price Tracking Bot
+
+- Used Python to create a bot that checks the price of a product at 8:00 a.m. every Monday, Wednesday, Friday, and Saturday.
+- If the price drops below our target price, then the bot sends an email to notify the user of the price drop.
+- Used BeautifulSoup for web scraping, the SMTP module to send the emails, and crontab to keep the script active.
+
+
+

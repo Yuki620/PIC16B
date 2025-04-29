@@ -1,0 +1,22 @@
+---
+title: "About"
+image: my_profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/yukiyu02/
+    - icon: github
+      text: Github
+      href: https://github.com/Yuki620
+    - icon: inbox-fill
+      text: Email
+      url: "mailto:20yuchi@gmail.com"
+
+---
+
+Hi! I’m Yuki Yu, a Master of Analytics student at MIT and a recent graduate of UCLA, where I double majored in Applied Mathematics and Statistics & Data Science.
+I focus on applying advanced analytics, optimization, and machine learning to solve real-world problems. My interests lie in using data to drive strategic decisions, uncover meaningful patterns, and design systems that are both efficient and impactful.
+
+Learn more about me through my [Resume](/Resume.pdf "Resume").
