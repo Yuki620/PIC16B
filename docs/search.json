@@ -11,56 +11,35 @@
     "href": "experiences.html",
     "title": "Work and Experience",
     "section": "",
-    "text": "Python, R, SQL, SAS, C++, MATLAB, Java, Tableau, Microsoft Suite (Word, PowerPoint, Excel)\n\n\n\nEnglish (native), Mandarin Chinese (native), Japanese (Advanced)"
+    "text": "Master of Business Analytics | 2024–2025\n\nCoursework: Machine Learning, Optimization Methods, Analytics Edge\nProjects:\n\nML Project: Classification modeling and designing recommendation systems for health news tweets (Python)\nOptimization Project: Optimizing EV charging station placements & charger allocations in Boston (Python, Julia)\n\n\n\n\n\nBachelor of Science | Applied Mathematics and Statistics & Data Science | 2020–2024"
   },
   {
-    "objectID": "experiences.html#technical",
-    "href": "experiences.html#technical",
+    "objectID": "experiences.html#education",
+    "href": "experiences.html#education",
     "title": "Work and Experience",
     "section": "",
-    "text": "Python, R, SQL, SAS, C++, MATLAB, Java, Tableau, Microsoft Suite (Word, PowerPoint, Excel)"
+    "text": "Master of Business Analytics | 2024–2025\n\nCoursework: Machine Learning, Optimization Methods, Analytics Edge\nProjects:\n\nML Project: Classification modeling and designing recommendation systems for health news tweets (Python)\nOptimization Project: Optimizing EV charging station placements & charger allocations in Boston (Python, Julia)\n\n\n\n\n\nBachelor of Science | Applied Mathematics and Statistics & Data Science | 2020–2024"
   },
   {
-    "objectID": "experiences.html#languages",
-    "href": "experiences.html#languages",
+    "objectID": "experiences.html#experience",
+    "href": "experiences.html#experience",
     "title": "Work and Experience",
-    "section": "",
-    "text": "English (native), Mandarin Chinese (native), Japanese (Advanced)"
+    "section": "💻 Experience",
+    "text": "💻 Experience\n\nMIT Sloan / Comcast | Data Scientist, Capstone Team Member\nSpring 2025 – Present\n\nLeveraging Natural Language Processing (NLP), Large Language Models (LLMs) to analyze real-time customer interactions in calls and optimize engagement strategies\nImplementing Retrieval-Augmented Generation (RAG) to identify customer issues in live calls and automate solution recommendations to improve customer satisfaction and reduce agent workload (Python, PySpark)\n\n\n\nMIT Sloan / CMA CGM | Data Scientist, Analytics Lab Team Member\nFall 2024\n\nForecasted U.S. import trends across 6 regions and 4 products using machine learning algorithms ARIMA, SARIMAX, XGBoost, and Random Forest, improving operational efficiency and strategic planning (Python, R)\nCreated data-driven reports and presented insights to non-technical supervisors, ensuring data accessibility and informed decision-making\n\n\n\nAcademia Sinica | Research Intern\nSummer 2023\n\nRefined a mathematical model of biofilm oscillations, using ODE modeling and RK4 solvers to enhance predictions of microbial behavior relevant to infection control (Python)\nSimulated the dynamics and behavior of individual-based biofilm models, providing insights into microbial interactions and biofilm development under varying conditions (NetLogo)\n\n\n\nMechanics Bank Auto Finance | Auto Risk Analyst (Part-Time)\n2022–2023\n\nDeveloped an originations scorecard in a two-person team, completing most of the model building under mentor guidance to reduce overallocation risks and optimize resources for bank expansion\nProcessed large-scale transactional data to create a development database for the scorecard (SAS, SQL, Excel)\nBuilt a logistic regression inference model to identify key predictors for risk assessment, optimizing resource allocation and improve decision-making (SQL, SAS)"
   },
   {
-    "objectID": "experiences.html#academia-sinica---research-intern",
-    "href": "experiences.html#academia-sinica---research-intern",
+    "objectID": "experiences.html#technical-skills",
+    "href": "experiences.html#technical-skills",
     "title": "Work and Experience",
-    "section": "Academia Sinica - Research Intern",
-    "text": "Academia Sinica - Research Intern\n\nChecked the validity of a mathematical model of biofilm oscillations presented in a research paper and modified it\nWrote new ODE models and solved them in Python using RK4 and ran simulations in NetLogo to see how the models would behave as individual-based models"
+    "section": "🔧 Technical Skills",
+    "text": "🔧 Technical Skills\n\nLanguages: Python, R, SQL, PySpark, Julia, SAS, C++\nTools: Tableau, Databricks, Git, Excel\nMethods: Machine Learning, Optimization, Statistical Testing, Time Series Forecasting"
   },
   {
-    "objectID": "experiences.html#mechanics-bank-auto-finance---auto-risk-analyst",
-    "href": "experiences.html#mechanics-bank-auto-finance---auto-risk-analyst",
+    "objectID": "experiences.html#additional-information",
+    "href": "experiences.html#additional-information",
     "title": "Work and Experience",
-    "section": "Mechanics Bank Auto Finance - Auto Risk Analyst",
-    "text": "Mechanics Bank Auto Finance - Auto Risk Analyst\n\nWorked in the originations scorecard development team to build a higher accuracy scorecard to minimize the overallocation of resources for risk. This would have freed up resources that could be used towards the current expansion of the bank.\nPulled, cleaned, and prepared the data to build the development database for a new custom originations scorecard using SAS, SQL, and Excel\nBuilt a preliminary logistic inference model for the scorecard with SQL and SAS\nBuilt a finalized version of an inference model that will generate loss predictions with more accuracy Mechanics Bank Auto Finance"
-  },
-  {
-    "objectID": "experiences.html#asa-datafest-at-ucla-2023-judges-choice-winner",
-    "href": "experiences.html#asa-datafest-at-ucla-2023-judges-choice-winner",
-    "title": "Work and Experience",
-    "section": "ASA DataFest at UCLA 2023 – Judge’s Choice Winner",
-    "text": "ASA DataFest at UCLA 2023 – Judge’s Choice Winner\n\n48-hour data analytics hackathon with almost undergraduates and 80 teams. This year’s data was on ABA’s Pro Bono Service which provides free legal counseling. Our team won the Judge’s Choice Award for humanizing the data.\nOur team focused on the responsiveness of this service and its client retention rate with added insight from sentiment analysis.\nUsed R, Python, and Tableau to analyze and visualize the data."
-  },
-  {
-    "objectID": "experiences.html#imdb-reviews-sentiment-analysis",
-    "href": "experiences.html#imdb-reviews-sentiment-analysis",
-    "title": "Work and Experience",
-    "section": "IMDB Reviews Sentiment Analysis",
-    "text": "IMDB Reviews Sentiment Analysis\n\nUsed Python to do NLP and conduct sentiment analysis on the movie reviews left on the IMDB website\nExamined various machine learning algorithms such as logistic regression, logistic regression with SGD, KNN, Random Forest, and Decision Trees under both BoW and TF-IDF"
-  },
-  {
-    "objectID": "experiences.html#amazon-price-tracking-bot",
-    "href": "experiences.html#amazon-price-tracking-bot",
-    "title": "Work and Experience",
-    "section": "Amazon Price Tracking Bot",
-    "text": "Amazon Price Tracking Bot\n\nUsed Python to create a bot that checks the price of a product at 8:00 a.m. every Monday, Wednesday, Friday, and Saturday.\nIf the price drops below our target price, then the bot sends an email to notify the user of the price drop.\nUsed BeautifulSoup for web scraping, the SMTP module to send the emails, and crontab to keep the script active."
+    "section": "📅 Additional Information",
+    "text": "📅 Additional Information\n\nFluent in English and Chinese, Advanced in Japanese\nAvid runner and amateur baker 🌾✨\n\n\nDownload Resume (PDF)"
   },
   {
     "objectID": "posts/Homework1/index.html",
